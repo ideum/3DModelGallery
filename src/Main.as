@@ -1,6 +1,7 @@
 package 
 {
-	import com.gestureworks.away3d.Away3DTouchManager;
+	import com.gestureworks.away3d.TouchManager2D;
+	import com.gestureworks.away3d.TouchManager3D;
 	import com.gestureworks.cml.core.CMLParser;
 	import com.gestureworks.core.GestureWorks;
 	import com.gestureworks.events.*;
@@ -8,9 +9,6 @@ package
 	import com.gestureworks.cml.core.CMLAway3D; CMLAway3D;
 	ModelPopup;
 	ModelGallery;
-	Model2;
-
-
 
 	[SWF(width = "1920", height = "1080", backgroundColor = "0x000000", frameRate = "60")]
 
@@ -35,9 +33,10 @@ package
 		{
 			CMLParser.removeEventListener(CMLParser.COMPLETE, cmlInit);
 			trace("cmlInit()");
-			Away3DTouchManager.initialize();
-			var mg:ModelGallery =  new ModelGallery();
-			addChild(mg);
+			TouchManager2D.initialize();
+			TouchManager3D.initialize();
+			var mg:ModelGallery =  new ModelGallery;			
+			stage.addChildAt(mg, 0);
 			mg.init();
 		}
 

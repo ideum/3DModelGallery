@@ -18,7 +18,6 @@
     <class path="src" />
     <class path="..\gwas\development\cml_core" />
     <class path="..\gwas\development\gml_core" />
-    <class path="..\gwas\development\lib" />
     <class path="..\gwas\development\away3d" />
     <class path="..\gwas\development\lib\away3d\src" />
     <class path="..\gwas\development\lib\away3d\pb" />
@@ -62,6 +61,8 @@
     <element path="..\..\gwas\development\lib\gml_ext.swc" />
     <element path="..\gwas\development\lib\cml_ext.swc" />
     <element path="..\gwas\development\lib\gml_ext.swc" />
+    <element path="..\gwas\development\gml_core\lib\gml_ext.swc" />
+    <element path="..\gwas\development\cml_core\lib\cml_ext.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

@@ -25,6 +25,7 @@ package {
 			super();
 			mouseChildren = true;
 			CMLParser.addEventListener(CMLParser.COMPLETE, cmlInit);
+			visible = false;
 		}
 		
 		private function cmlInit(event:Event):void {

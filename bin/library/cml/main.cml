@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-
 <cml tuio="false" simulator="false">
 
 <Stage fullscreen="true" />
@@ -10,49 +8,26 @@
 	<Library type="swf" src="library/swfs/openexhibits_assets.swf" />	
 </LibraryKit>
 
-<Background>
-	<Image id="default-bg" src="library/assets/background.png" />    
-</Background>
 
 
-<!--<Scene viewAntiAlias="4">
-	 if no viewDim given use full stage
-	<Camera pos="0,0,-1000" />
-	<ModelGallery>
-		<Model2 src="library/assets/models/clown.awd" position="-500,0,0">
-			<Gesture ref="n-drag-3d"/>
-			<Gesture ref="n-scale-3d"/>
-			<Gesture ref="n-rotate-3d"/>		
-		</Model2>	
-		<Model2 src="library/assets/models/coyote.awd" position="500,0,0">
-			<Gesture ref="n-drag-3d"/>
-			<Gesture ref="n-scale-3d"/>
-			<Gesture ref="n-rotate-3d"/>		
-		</Model2>		
-	</ModelGallery>
-</Scene>-->
+<Hotspot x="0" y="0" component="oe-text-box" tether="false" compX="20" compY="150" compTween="true"  compResetOnOpen="true" >
+	<Button dispatch="down:hotspot" initial="btn-vis" down="btn-vis" up="btn-vis">
+		<Image id="btn-vis" src="library/assets/oe.png" x="0" y="0" />  
+		<Graphic id="btn-hit" shape="rectangle" fill="color" color="0xffff00" lineStroke="0" width="500" height="125" alpha="0"/>
+	</Button>
+</Hotspot>
 
-
-
-
+<ModelPopup id="oe-text-box" visible="false" x="20" y="150" rotation="0">
+	<Graphic shape="rectangle" width="500" height="520" color="0xffffff" lineStroke="0" lineColor="0x000000" />
+	<Image x="20" y="20" src="library/assets/oe-pic.png" />   
+	<Text textBitmap="true" selectable="false" font="OpenSansBold" fontSize="18" x="20" y="230" width="440" height="300" wordWrap="true" multiline="true" color="0x000000" 
+		text="Open Exhibits focuses on the development of new human computer interaction (HCI) exhibits that holds the promise of creating visitor experiences that are physically engaging and socially interactive. The Open Exhibits software collection includes templates, components, and utilities that serve as building blocks for creating digital exhibits and interactives. These tools facilitate the development of applications that encourage shared-surface, collaborative computing and other HCI innovations."/>
+	<Include src="library/cml/buttons/close-button-oe.cml"/>
+	<Gesture ref="n-drag" gestureOn="true"/>
+	<Gesture ref="n-rotate" gestureOn="true"/>
+</ModelPopup>
 
 <!--
-	<Hotspot x="0" y="0" component="oe-text-box" tether="false" compX="20" compY="150" compTween="true"  compResetOnOpen="true" >
-		<Button dispatch="down:hotspot" initial="btn-vis" down="btn-vis" up="btn-vis">
-			<Image id="btn-vis" src="library/assets/oe.png" x="0" y="0" />  
-			<Graphic id="btn-hit" shape="rectangle" fill="color" color="0xffff00" lineStroke="0" width="500" height="125" alpha="0"/>
-		</Button>
-	</Hotspot>
-
-	<ModelPopup id="oe-text-box" visible="false" x="20" y="150" rotation="0">
-		<Graphic shape="rectangle" width="500" height="520" color="0xffffff" lineStroke="0" lineColor="0x000000" />
-		<Image x="20" y="20" src="library/assets/oe-pic.png" />   
-		<Text textBitmap="true" selectable="false" fontSize="18" x="20" y="230" width="440" height="500" wordWrap="true" multiline="true" color="0x000000" text="Open Exhibits focuses on the development of new human computer interaction (HCI) exhibits that holds the promise of creating visitor experiences that are physically engaging and socially interactive. The Open Exhibits software collection includes templates, components, and utilities that serve as building blocks for creating digital exhibits and interactives. These tools facilitate the development of applications that encourage shared-surface, collaborative computing and other HCI innovations."/>
-		<Include src="library/cml/buttons/close-button-oe.cml"/>
-		<Gesture ref="n-drag" gestureOn="true"/>
-		<Gesture ref="n-rotate" gestureOn="true"/>
-	</ModelPopup>
-
 	<Hotspot x="1348" y="0" component="iaia-text-box" tether="false" compX="1398" compY="150" compTween="true"  compResetOnOpen="true">
 		<Button dispatch="down:hotspot" initial="btn-vis" down="btn-vis" up="btn-vis">
 			<Image id="btn-vis" src="library/assets/iaia.png" x="0" y="0" />  
