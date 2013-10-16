@@ -2,136 +2,90 @@
 
 <cml>
 
-<!-- Judith -->
-<ModelPopup id="judith" width="500" height="270">
+	
+<!-- Blue Mask: Judith 
+<ModelPopup id="blue-mask" width="500" height="270">
 	<Graphic shape="rectangle" width="500" height="270" color="0x5a7eab" lineStroke="0" alpha=".8" />
-	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Untitled" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Stoneware" textBitmap="true"/>
-		
 	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1974" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: LaDucer, Judith Vincente (Jicarilla Apache)" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 7.5 in x 4.5 in" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Judith Vicenti" textBitmap="true"/>
-	
 	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" gestureOn="true"/>
-	<Gesture ref="n-rotate" gestureOn="true"/>
-</ModelPopup>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-rotate" />
+</ModelPopup>-->
 
 
-<!-- Brian -->
-
-<ModelPopup id="brian" x="600" width="500" height="270" >
+<!-- Coyote: Brian -->
+<ModelPopup id="coyote" width="500" height="270">
 	<Graphic shape="rectangle" width="500" height="270" color="0xc36d34" lineStroke="0" alpha=".8"/>
-	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Coyote with Pot" textBitmap="true" />
-	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>
-		
+	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1985" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Romero, Diego (Cochiti)" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 7.125 in x 5.375 in" textBitmap="true"/>
-	
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Brian Shemayme" textBitmap="true"/>
-	
 	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" gestureOn="true"/>
-	<Gesture ref="n-rotate" gestureOn="true"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-rotate" />
 </ModelPopup>
 
-<!-- Colleen -->
-
-<ModelPopup id="colleen" x="1200" width="500" height="270" >
+<!-- Basket: Colleen 
+<ModelPopup id="basket" x="1200" width="500" height="270" >
 	<Graphic shape="rectangle" width="500" height="320" color="0x976a33" lineStroke="0" alpha=".8" />
-	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: N/A" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="60" width="440" height="100" color="0xffffff" wordWrap="true" multiline="true" textBitmap="true" text="Medium: Basketry, Vegetal, Yucca, Dyes, Aniline, Dyes, Vegetal on close-coiled yucca on bundled Galleta grass"/>
-		
-	<Text fontSize="18" x="20" y="150" width="440" height="60" color="0xffffff" text="Date: 1945-1960" textBitmap="true" />
-	
-	<Text fontSize="18" x="20" y="190" width="440" height="60" color="0xffffff" text="Artist: Unknown" textBitmap="true" />
-	
-	<Text fontSize="18" x="20" y="230" width="440" height="60" color="0xffffff" text="Dimensions: 7 in x 9 in" textBitmap="true" />
-	
+	<Text fontSize="18" x="20" y="60" width="440" height="100" color="0xffffff" wordWrap="true" multiline="true" textBitmap="true" text="Medium: Basketry, Vegetal, Yucca, Dyes, Aniline, Dyes, Vegetal on close-coiled yucca on bundled Galleta grass"/>	
+	<Text fontSize="18" x="20" y="150" width="440" height="60" color="0xffffff" text="Date: 1945-1960" textBitmap="true" />	
+	<Text fontSize="18" x="20" y="190" width="440" height="60" color="0xffffff" text="Artist: Unknown" textBitmap="true" />	
+	<Text fontSize="18" x="20" y="230" width="440" height="60" color="0xffffff" text="Dimensions: 7 in x 9 in" textBitmap="true" />	
 	<Text fontSize="18" x="20" y="270" width="440" height="60" color="0xffffff" text="3D Scan By: Colleen Lucero" textBitmap="true"/>
-	
 	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" gestureOn="true"/>
-	<Gesture ref="n-rotate" gestureOn="true"/>
-</ModelPopup>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-rotate" />
+</ModelPopup>-->
 
-<!-- Dedric -->
-
-<ModelPopup id="dedric" x="650" y="600" width="500" height="270" >
-	<Graphic shape="rectangle" width="500" height="270" color="0xa44a27" lineStroke="0" alpha=".8"/>
-	
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Wha-lah (Bear)" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Ceramic, Clay" textBitmap="true"/>
-		
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1991" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Cajero , Joe (Jemez)" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 12 in x 11.5 in" textBitmap="true"/>
-	
+<!-- Clown: Dedric -->
+<ModelPopup id="clown" width="500" height="270" >
+	<Graphic shape="rectangle" width="500" height="270" color="0xa44a27" lineStroke="0" alpha=".8"/>	
+	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Wha-lah (Bear)" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Ceramic, Clay" textBitmap="true"/>		
+	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1991" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Cajero , Joe (Jemez)" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 12 in x 11.5 in" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Dedric Lupe" textBitmap="true"/>
-	
 	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" gestureOn="true"/>
-	<Gesture ref="n-rotate" gestureOn="true"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-rotate" />
 </ModelPopup>
 
-<!-- Craig -->
-
-<ModelPopup id="dedric" x="100" y="700" width="500" height="270" >
-	<Graphic shape="rectangle" width="500" height="270" color="0xb39269" lineStroke="0" alpha=".8"/>
-	
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: N/A" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Stone, Sandstone" textBitmap="true"/>
-		
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 2002"/>
-	
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Cota, Laura Fragua (Jemez)" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 18 in x 6 in x 4 in" textBitmap="true"/>
-	
+<!-- Stone-sculpture: Craig -->
+<ModelPopup id="stone-sculpture" width="500" height="270" >
+	<Graphic shape="rectangle" width="500" height="270" color="0xb39269" lineStroke="0" alpha=".8"/>	
+	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: N/A" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Stone, Sandstone" textBitmap="true"/>		
+	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 2002"/>	
+	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Cota, Laura Fragua (Jemez)" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 18 in x 6 in x 4 in" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Craig Tompkins" textBitmap="true"/>
-	
 	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" gestureOn="true"/>
-	<Gesture ref="n-rotate" gestureOn="true"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-rotate" />
 </ModelPopup>
 
-<!-- Tazbah -->
-
-<ModelPopup id="tazbah" x="50" y="300" width="500" height="270" >
-	<Graphic shape="rectangle" width="500" height="270" color="0x398b96" lineStroke="0" alpha=".8"/>
-	
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Star Blanket" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>
-		
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1983" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Romero, Arlene (Taos)" textBitmap="true"/>
-	
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 15 in x 9 in" textBitmap="true"/>
-	
+<!-- Blanket: Tazbah -->
+<ModelPopup id="blanket" width="500" height="270" >
+	<Graphic shape="rectangle" width="500" height="270" color="0x398b96" lineStroke="0" alpha=".8"/>	
+	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Star Blanket" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>		
+	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1983" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Romero, Arlene (Taos)" textBitmap="true"/>	
+	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 15 in x 9 in" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Tazbah Gaussoin" textBitmap="true"/>
-	
 	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" gestureOn="true"/>
-	<Gesture ref="n-rotate" gestureOn="true"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-rotate" />
 </ModelPopup>
 
 

@@ -1,16 +1,12 @@
 package {
 	
-	import com.gestureworks.cml.core.CMLObjectList;
+	import com.gestureworks.cml.core.CMLParser;
 	import com.gestureworks.cml.element.Button;
 	import com.gestureworks.cml.element.TouchContainer;
-	import com.gestureworks.cml.events.StateEvent;
-	import com.gestureworks.cml.utils.document;
-	import com.gestureworks.cml.core.CMLParser;
 	import com.gestureworks.events.GWGestureEvent;
 	import com.gestureworks.events.GWTouchEvent;
 	import com.greensock.TweenMax;
 	import flash.events.Event;
-	import flash.events.TouchEvent;
 	
 	/**
 	 * ...
@@ -36,15 +32,30 @@ package {
 		}
 		
 		private function onButtonTap(e:GWGestureEvent):void {
-			TweenMax.to(this, .25, { alpha:0, onComplete:hide } );
-			function hide():void {
-				visible = false;
-				alpha = 1;
-			}
+			tweenOut();
 		}	
 		
 		private function onTouchBegin(e:GWTouchEvent):void {
 			parent.addChild(this);
+		}	
+		
+		public function tweenIn():void {
+			if (TweenMax.isTweening(this)) return;
+			rotation = 0;
+			x = stage.stageWidth / 2 + 100;
+			y = stage.stageHeight / 2 - 100;			
+			alpha = 0;			
+			visible = true;
+			TweenMax.to(this, .25, { alpha:1 } );
+		}
+		
+		public function tweenOut():void {
+			if (TweenMax.isTweening(this)) return;
+			TweenMax.to(this, .25, { alpha:0, onComplete:hide } );
+			function hide():void {
+				alpha = 1;
+				visible = false;
+			}
 		}		
 		
 	}

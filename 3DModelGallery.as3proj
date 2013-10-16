@@ -59,10 +59,8 @@
   <libraryPaths>
     <element path="..\..\gwas\development\lib\cml_ext.swc" />
     <element path="..\..\gwas\development\lib\gml_ext.swc" />
-    <element path="..\gwas\development\lib\cml_ext.swc" />
-    <element path="..\gwas\development\lib\gml_ext.swc" />
-    <element path="..\gwas\development\gml_core\lib\gml_ext.swc" />
     <element path="..\gwas\development\cml_core\lib\cml_ext.swc" />
+    <element path="..\gwas\development\gml_core\lib\gml_ext.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
