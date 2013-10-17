@@ -3,6 +3,7 @@ package  {
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
 	import away3d.core.math.MathConsts;
+	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
 	import away3d.events.LoaderEvent;
 	import away3d.library.AssetLibrary;
@@ -18,12 +19,24 @@ package  {
 	import flash.events.Event;
 	import flash.geom.Vector3D;
 	import flash.net.URLRequest;
+	import flash.utils.Dictionary;
+	import com.greensock.TweenLite; 
+	import com.greensock.plugins.TweenPlugin; 
+	import com.greensock.plugins.ShortRotationPlugin; 	
 	
 	public class ModelGallery extends Sprite{ 		
 		private var models:Array = [];
 		private var modelNames:Array = [];
 		private var modelIndex:Number = 1;
-		private var modelButtons:Array = [];		
+		private var modelButtons:Array = [];	
+		private var modelPositions:Array = [];
+		private var modelScales:Array = [];
+		private var modelScaleMap:Dictionary = new Dictionary;
+		private var modelY:Array = [];
+		
+		private var minScale:Number = .75;
+		private var maxScale:Number = 1.25;
+		
 		private var touchSprites:Array = [];
 		private var view:View3D;
 		private var container:ObjectContainer3D;
@@ -31,12 +44,12 @@ package  {
 		private var touchView:TouchSprite;
 		private var loadCnt:uint = 0;
 		private var popups:Array = [];
-		private var modelPositions:Array = [];
 		private var fileList:Array = [];
 		private var dragRight:Boolean = false;
 		private var initialized:Boolean = false;
 		
 		public function ModelGallery() {
+			TweenPlugin.activate([ShortRotationPlugin]);	
 			super();
 		}
 		
@@ -64,6 +77,24 @@ package  {
 				270
 			]
 			
+			modelY = [
+				0,
+				0,
+				0,
+				-5
+			]			
+			
+			modelScales = [
+				.75,
+				.4,
+				1.1,
+				.5
+			]
+			
+			for (var j:int = 0; j < modelNames.length; j++) {
+				modelScaleMap[modelNames[j]] = modelScales[j];
+			}
+						
 			Parsers.enableAllBundled();		
 			AssetLibrary.addEventListener(LoaderEvent.RESOURCE_COMPLETE, resourceComplete);
 			AssetLibrary.addEventListener(AssetEvent.ASSET_COMPLETE, assetComplete);	
@@ -128,8 +159,11 @@ package  {
 				container.addChild(models[i]);
 				p = Math3DUtils.sphericalToCartesian(new Vector3D( (modelPositions[i] ) , 0, 150));				
 				models[i].x = p.x;
-				models[i].y = p.y;
+				models[i].y = modelY[i];
 				models[i].z = p.z;
+				models[i].scaleX = modelScales[i];
+				models[i].scaleY = modelScales[i];
+				models[i].scaleZ = modelScales[i];				
 				
 				t = TouchManager2D.registerTouchObject(models[i]);
 				t.gestureList = { "n-drag":true, "n-tap":true, "n-scale":true };					
@@ -150,13 +184,21 @@ package  {
 		}			
 		
 		private function onModelDrag(e:GWGestureEvent):void {
-			e.target.vto.rotationY += e.value.drag_dx * .5;	
+			e.target.vto.rotationY -= e.value.drag_dx * .5;	
 		}
 		
 		private function onModelScale(e:GWGestureEvent):void {
-			e.target.vto.scaleX += e.value.scale_dsx;
-			e.target.vto.scaleY += e.value.scale_dsx;
-			e.target.vto.scaleZ += e.value.scale_dsx;
+			var val:Number = e.target.vto.scaleX + e.value.scale_dsx * .75;
+			var orig:Number = modelScaleMap[e.target.vto.name];
+			
+			if (val < (minScale * orig))
+				val = minScale * orig;
+			else if (val > (maxScale * orig))
+				val = maxScale * orig;
+				
+			e.target.vto.scaleX = val;
+			e.target.vto.scaleY = val;
+			e.target.vto.scaleZ = val;
 		}	
 		
 		private function onModelTap(e:GWGestureEvent):void {
@@ -180,7 +222,9 @@ package  {
 		
 
 		
-		private function updateModelButtons():void {			
+		private function updateModelButtons():void {	
+			
+			// TODO: reduce redundant code
 			for (var i:int = 0; i < modelPositions.length; i++) {
 				if (container.rotationY <= 0) {
 					if (-modelPositions[i] >= (container.rotationY % 360) - 45 && 
@@ -221,8 +265,9 @@ package  {
 			
 			// TODO: take the shortest route to rotation
 			for (var i:int = 0; i < modelNames.length; i++) {
-				if ( (targetId == modelNames[i]  + "-button")) {					
-					TweenMax.to(container, 1, { rotationY:-modelPositions[i] } );						
+				if ( (targetId == modelNames[i]  + "-button")) {	
+					container.rotationY = container.rotationY  % 360;
+					TweenMax.to(container, 1, { shortRotation:{ rotationY:-modelPositions[i] } });
 					break;
 				}
 			}
