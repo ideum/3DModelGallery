@@ -262,8 +262,6 @@ package  {
 		}
 		
 		private function onModelButtonTap(targetId:String):void {
-			
-			// TODO: take the shortest route to rotation
 			for (var i:int = 0; i < modelNames.length; i++) {
 				if ( (targetId == modelNames[i]  + "-button")) {	
 					container.rotationY = container.rotationY  % 360;
