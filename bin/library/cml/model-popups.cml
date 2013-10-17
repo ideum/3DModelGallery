@@ -75,7 +75,7 @@
 </ModelPopup>
 
 <!-- Blanket: Tazbah -->
-<ModelPopup id="blanket" width="500" height="270" >
+<ModelPopup id="star-blanket" width="500" height="270" >
 	<Graphic shape="rectangle" width="500" height="270" color="0x398b96" lineStroke="0" alpha=".8"/>	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Star Blanket" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>		

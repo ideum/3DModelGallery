@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cml>
+
+<Container x="1500" y="30">
+	<ModelButton id="star-blanket-button" src="library/assets/models/star-blanket.png" width="60" resample="true" />
+	<ModelButton id="stone-sculpture-button" src="library/assets/models/stone-sculpture.png" width="60" resample="true" />
+	<ModelButton id="clown-button" src="library/assets/models/clown.png" width="60" resample="true" />
+	<ModelButton id="coyote-button" src="library/assets/models/coyote.png" width="60" resample="true" />
+	<Layout classRef="ListLayout" spacingX="100" />
+</Container>
+
+</cml>

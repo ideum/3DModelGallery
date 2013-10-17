@@ -9,6 +9,7 @@ package
 	import com.gestureworks.cml.core.CMLAway3D; CMLAway3D;
 	ModelPopup;
 	ModelGallery;
+	ModelButton;
 
 	[SWF(width = "1920", height = "1080", backgroundColor = "0x000000", frameRate = "60")]
 
@@ -18,9 +19,7 @@ package
 		{
 			super();
 			cml = "library/cml/main.cml";
-			gml = "library/gml/gestures.gml";
-			
-			// add this event listener so we know when the CML parsing is complete
+			gml = "library/gml/gestures.gml";			
 			CMLParser.addEventListener(CMLParser.COMPLETE, cmlInit);
 		}
 	
