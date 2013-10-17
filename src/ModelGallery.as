@@ -10,6 +10,7 @@ package  {
 	import com.gestureworks.away3d.TouchManager2D;
 	import com.gestureworks.away3d.utils.Math3DUtils;
 	import com.gestureworks.cml.utils.document;
+	import com.gestureworks.cml.utils.NumberUtils;
 	import com.gestureworks.core.TouchSprite;
 	import com.gestureworks.events.GWGestureEvent;
 	import com.greensock.TweenMax;
@@ -21,7 +22,7 @@ package  {
 	public class ModelGallery extends Sprite{ 		
 		private var models:Array = [];
 		private var modelNames:Array = [];
-		private var modelIndex:Number = -1;
+		private var modelIndex:Number = 1;
 		private var modelButtons:Array = [];		
 		private var touchSprites:Array = [];
 		private var view:View3D;
@@ -33,6 +34,7 @@ package  {
 		private var modelPositions:Array = [];
 		private var fileList:Array = [];
 		private var dragRight:Boolean = false;
+		private var initialized:Boolean = false;
 		
 		public function ModelGallery() {
 			super();
@@ -57,9 +59,9 @@ package  {
 			
 			modelPositions = [
 				0,
-				270,
+				90,
 				180,
-				90
+				270
 			]
 			
 			Parsers.enableAllBundled();		
@@ -124,7 +126,7 @@ package  {
 			var p:Vector3D;
 			for (var i:int = 0; i < models.length; i++) {				
 				container.addChild(models[i]);
-				p = Math3DUtils.sphericalToCartesian(new Vector3D( (modelPositions[i] * MathConsts.DEGREES_TO_RADIANS) , 0, 150));				
+				p = Math3DUtils.sphericalToCartesian(new Vector3D( (modelPositions[i] ) , 0, 150));				
 				models[i].x = p.x;
 				models[i].y = p.y;
 				models[i].z = p.z;
@@ -137,11 +139,14 @@ package  {
 				t.releaseInertia = true;					
 				touchSprites.push(t);				
 			}
+			initialized = true;
 		}
 		
 		private function update(e:Event = null):void {
-			updateModelButtons();
-			view.render();			
+			if (initialized) {
+				updateModelButtons();
+				view.render();
+			}
 		}			
 		
 		private function onModelDrag(e:GWGestureEvent):void {
@@ -173,34 +178,51 @@ package  {
 			container.rotationY += e.value.drag_dx * .1;
 		}	
 		
-		private function updateModelButtons():void {
-			var i:int = 0;
-			
-			//trace(container.rotationY);
-			
-			for (i = 0; i < modelPositions.length; i++) {
-				if (modelPositions[i] >= (container.rotationY % 360) - 45 && 
-					modelPositions[i] < (container.rotationY % 360) + 45) {
-					//trace(container.rotationY % 360);	
-					break;
+
+		
+		private function updateModelButtons():void {			
+			for (var i:int = 0; i < modelPositions.length; i++) {
+				if (container.rotationY <= 0) {
+					if (-modelPositions[i] >= (container.rotationY % 360) - 45 && 
+						-modelPositions[i] < (container.rotationY % 360) + 45) {
+						if (i != modelIndex) {
+							if (popups[modelIndex].visible) {
+								popups[modelIndex].tweenOut();
+							}
+							for each (var item:ModelButton in modelButtons) {
+								if ( item != modelButtons[i])
+									modelButtons[modelIndex].tweenOut();
+							}
+							modelButtons[i].tweenIn();
+							modelIndex = i;
+						}					
+					}
 				}
-			}
-			
-			if (i != modelIndex) {
-				if (popups[i].visible) {
-					popups[i].tweenOut();
+				else {			
+					if (modelPositions[i] >= (360 - (container.rotationY % 360) - 45) && 
+						modelPositions[i] < (360 - (container.rotationY % 360) + 45) ) {
+						if (i != modelIndex) {
+							if (popups[modelIndex].visible) {
+								popups[modelIndex].tweenOut();
+							}
+							for each (var item:ModelButton in modelButtons) {
+								if ( item != modelButtons[i])
+									modelButtons[modelIndex].tweenOut();
+							}							
+							modelButtons[i].tweenIn();
+							modelIndex = i;
+						}					
+					}					
 				}
-				
-				modelIndex = i;
-				trace("new modelIndex", modelIndex);				
-			}			
+			}		
 		}
 		
 		private function onModelButtonTap(targetId:String):void {
 			
+			// TODO: take the shortest route to rotation
 			for (var i:int = 0; i < modelNames.length; i++) {
-				if ( (targetId == modelNames[i]  + "-button")) {
-					TweenMax.to(container, 1, { rotationY:modelPositions[i] });
+				if ( (targetId == modelNames[i]  + "-button")) {					
+					TweenMax.to(container, 1, { rotationY:-modelPositions[i] } );						
 					break;
 				}
 			}

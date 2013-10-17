@@ -33,7 +33,6 @@ package
 			CMLParser.removeEventListener(CMLParser.COMPLETE, cmlInit);
 			trace("cmlInit()");
 			TouchManager2D.initialize();
-			TouchManager3D.initialize();
 			var mg:ModelGallery =  new ModelGallery;			
 			stage.addChildAt(mg, 0);
 			mg.init();

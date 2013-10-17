@@ -43,13 +43,13 @@ package {
 		
 		public function tweenIn():void {
 			if (TweenMax.isTweening(this)) 
-				return;
+				TweenMax.killTweensOf(this);
 			TweenMax.to(this, .25, { alpha:alphaMax } );
 		}
 		
 		public function tweenOut():void {
 			if (TweenMax.isTweening(this)) 
-				return;
+				TweenMax.killTweensOf(this);
 			TweenMax.to(this, .25, {alpha:alphaMin});
 		}		
 		
