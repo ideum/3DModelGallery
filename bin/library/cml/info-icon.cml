@@ -1,0 +1,8 @@
+<cml>
+
+<Container id="info-icon" visible="false" alpha=".7">
+	<Graphic shape="circle" radius="20" lineStroke="1.5" color="0x555555" fillAlpha="0" />	
+	<SWF alpha="1" x="15" y="8" color="0xFFFFFF" scale="1.6" classRef="org.openexhibits.assets.Info" />
+</Container>
+	
+</cml>

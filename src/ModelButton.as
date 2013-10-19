@@ -35,10 +35,6 @@ package {
 		private function onButtonTap(e:GWGestureEvent):void {
 			if (tapFn != null)
 				tapFn.call(null, id);
-			if (alpha == alphaMin)
-				tweenIn();	
-			else
-				tweenOut();
 		}	
 		
 		public function tweenIn():void {

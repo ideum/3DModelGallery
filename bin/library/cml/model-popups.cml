@@ -19,7 +19,8 @@
 
 
 <!-- Coyote: Brian -->
-<ModelPopup id="coyote" width="500" height="270">
+<ModelPopup id="coyote" width="500" height="270" leap2D="false" nativeTouch="true" localModes="true">
+	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />		
 	<Graphic shape="rectangle" width="500" height="270" color="0xc36d34" lineStroke="0" alpha=".8"/>
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Coyote with Pot" textBitmap="true" />
 	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>	
@@ -29,7 +30,6 @@
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Brian Shemayme" textBitmap="true"/>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
-	<Gesture ref="n-rotate" />
 </ModelPopup>
 
 <!-- Basket: Colleen 
@@ -47,7 +47,8 @@
 </ModelPopup>-->
 
 <!-- Clown: Dedric -->
-<ModelPopup id="clown" width="500" height="270" >
+<ModelPopup id="clown" width="500" height="270"  leap2D="false" nativeTouch="true" localModes="true">
+	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />			
 	<Graphic shape="rectangle" width="500" height="270" color="0xa44a27" lineStroke="0" alpha=".8"/>	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Wha-lah (Bear)" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Ceramic, Clay" textBitmap="true"/>		
@@ -57,11 +58,11 @@
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Dedric Lupe" textBitmap="true"/>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
-	<Gesture ref="n-rotate" />
 </ModelPopup>
 
 <!-- Stone-sculpture: Craig -->
-<ModelPopup id="stone-sculpture" width="500" height="270" >
+<ModelPopup id="stone-sculpture" width="500" height="270"  leap2D="false" nativeTouch="true" localModes="true">
+	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />			
 	<Graphic shape="rectangle" width="500" height="270" color="0xb39269" lineStroke="0" alpha=".8"/>	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: N/A" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Stone, Sandstone" textBitmap="true"/>		
@@ -71,11 +72,11 @@
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Craig Tompkins" textBitmap="true"/>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
-	<Gesture ref="n-rotate" />
 </ModelPopup>
 
 <!-- Blanket: Tazbah -->
-<ModelPopup id="star-blanket" width="500" height="270" >
+<ModelPopup id="star-blanket" width="500" height="270"  leap2D="false" nativeTouch="true" localModes="true">
+	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />			
 	<Graphic shape="rectangle" width="500" height="270" color="0x398b96" lineStroke="0" alpha=".8"/>	
 	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Star Blanket" textBitmap="true"/>	
 	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>		
@@ -85,7 +86,6 @@
 	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Tazbah Gaussoin" textBitmap="true"/>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
-	<Gesture ref="n-rotate" />
 </ModelPopup>
 
 

@@ -2,7 +2,8 @@ package  {
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.View3D;
 	import away3d.controllers.HoverController;
-	import away3d.core.math.MathConsts;
+	import away3d.core.pick.PickingColliderType;
+	import away3d.core.pick.PickingType;
 	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
 	import away3d.events.LoaderEvent;
@@ -10,19 +11,19 @@ package  {
 	import away3d.loaders.parsers.Parsers;
 	import com.gestureworks.away3d.TouchManager2D;
 	import com.gestureworks.away3d.utils.Math3DUtils;
+	import com.gestureworks.cml.element.Container;
 	import com.gestureworks.cml.utils.document;
-	import com.gestureworks.cml.utils.NumberUtils;
 	import com.gestureworks.core.TouchSprite;
 	import com.gestureworks.events.GWGestureEvent;
+	import com.gestureworks.events.GWTouchEvent;
+	import com.greensock.plugins.ShortRotationPlugin;
+	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenMax;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Vector3D;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-	import com.greensock.TweenLite; 
-	import com.greensock.plugins.TweenPlugin; 
-	import com.greensock.plugins.ShortRotationPlugin; 	
 	
 	public class ModelGallery extends Sprite{ 		
 		private var models:Array = [];
@@ -33,10 +34,8 @@ package  {
 		private var modelScales:Array = [];
 		private var modelScaleMap:Dictionary = new Dictionary;
 		private var modelY:Array = [];
-		
 		private var minScale:Number = .75;
 		private var maxScale:Number = 1.25;
-		
 		private var touchSprites:Array = [];
 		private var view:View3D;
 		private var container:ObjectContainer3D;
@@ -47,15 +46,15 @@ package  {
 		private var fileList:Array = [];
 		private var dragRight:Boolean = false;
 		private var initialized:Boolean = false;
+		private var leapTouch:TouchSprite;
 		
 		public function ModelGallery() {
 			TweenPlugin.activate([ShortRotationPlugin]);	
 			super();
 		}
 		
-		public function init():void {
-			initAway3d();
-			
+		public function init():void {			
+					
 			fileList  = [
 				"library/assets/models/star-blanket.awd",
 				"library/assets/models/stone-sculpture.awd",				
@@ -94,21 +93,7 @@ package  {
 			for (var j:int = 0; j < modelNames.length; j++) {
 				modelScaleMap[modelNames[j]] = modelScales[j];
 			}
-						
-			Parsers.enableAllBundled();		
-			AssetLibrary.addEventListener(LoaderEvent.RESOURCE_COMPLETE, resourceComplete);
-			AssetLibrary.addEventListener(AssetEvent.ASSET_COMPLETE, assetComplete);	
-			AssetLibrary.load(new URLRequest(fileList[loadCnt]));
 			
-			popups = document.getElementsByTagName("ModelPopup");
-			modelButtons = document.getElementsByTagName("ModelButton");
-			
-			for (var i:int = 0; i < modelButtons.length; i++) {
-				modelButtons[i].tapFn = onModelButtonTap;
-			}			
-		}
-		
-		protected function initAway3d():void {
 			view = new View3D();
 			view.backgroundColor = 0x000000;
 			view.width = 1920;
@@ -131,10 +116,35 @@ package  {
 			touchView = new TouchSprite(view);
 			touchView.gestureList = { "n-drag":true };
 			touchView.releaseInertia = true;
-			touchView.addEventListener(GWGestureEvent.DRAG, onContainerDrag);			
-			addEventListener( Event.ENTER_FRAME, update );	
+			touchView.addEventListener(GWGestureEvent.DRAG, onContainerDrag);
+			touchView.localModes = true;
+			touchView.nativeTouch = true;
+			touchView.leap2D = false;			
+			addEventListener( Event.ENTER_FRAME, update );				
+			
+			Parsers.enableAllBundled();		
+			AssetLibrary.addEventListener(LoaderEvent.RESOURCE_COMPLETE, resourceComplete);
+			AssetLibrary.addEventListener(AssetEvent.ASSET_COMPLETE, assetComplete);	
+			AssetLibrary.load(new URLRequest(fileList[loadCnt]));
+			
+			popups = document.getElementsByTagName("ModelPopup");
+			modelButtons = document.getElementsByTagName("ModelButton");
+			
+			for (var i:int = 0; i < modelButtons.length; i++) {
+				modelButtons[i].tapFn = onModelButtonTap;
+			}
+			
+			//leapTouch = new TouchSprite();
+			//leapTouch.alpha = .25;
+			//leapTouch.graphics.beginFill(0xFFFFFF);
+			//leapTouch.graphics.drawRect(0, 0, 1920, 1080);
+			//leapTouch.graphics.endFill();
+			//leapTouch.gestureList = { "n-drag":true };
+			//leapTouch.addEventListener(GWGestureEvent.DRAG, onLeapDrag);
+			//leapTouch.addEventListener(GWGestureEvent.SWIPE, onLeapSwipe);
+			//addChild(leapTouch);
 		}
-				
+
 		private function assetComplete(e:AssetEvent):void {
 			if (e.asset is ObjectContainer3D) {
 				models.push(e.asset);
@@ -163,14 +173,18 @@ package  {
 				models[i].z = p.z;
 				models[i].scaleX = modelScales[i];
 				models[i].scaleY = modelScales[i];
-				models[i].scaleZ = modelScales[i];				
+				models[i].scaleZ = modelScales[i];	
+				//Mesh(models[i]).pickingCollider = PickingColliderType.AUTO_FIRST_ENCOUNTERED;
 				
 				t = TouchManager2D.registerTouchObject(models[i]);
 				t.gestureList = { "n-drag":true, "n-tap":true, "n-scale":true };					
 				t.addEventListener(GWGestureEvent.DRAG, onModelDrag);					
 				t.addEventListener(GWGestureEvent.TAP, onModelTap);		
 				t.addEventListener(GWGestureEvent.SCALE, onModelScale);		
-				t.releaseInertia = true;					
+				t.releaseInertia = true;
+				t.localModes = true;
+				t.nativeTouch = true;
+				t.leap2D = false;
 				touchSprites.push(t);				
 			}
 			initialized = true;
@@ -213,49 +227,92 @@ package  {
 			else
 				popup.tweenOut();			
 		}		
-				
 		
+		private function onLeapDrag(e:GWGestureEvent):void {		
+			if (e.value.n == 1) {
+				document.getElementById("info-icon").visible = true;
+				document.getElementById("info-icon").x = e.value.x;
+				document.getElementById("info-icon").y = e.value.y;
+			}
+			else {
+				document.getElementById("info-icon").visible = false;
+				var lp:Container = document.getElementById("leap-points");
+				var i:int;
+				for (i = 0; i < touchView.pointArray.length; i++) {
+					lp.childList[i].visible = true;
+					lp.childList[i].x = touchView.pointArray[i].x;
+					lp.childList[i].y = touchView.pointArray[i].y;
+				}
+				for (i = e.value.n; i < 10; i++) {
+					lp.childList[i].visible = false;
+				}	
+				container.rotationY += e.value.drag_dx * .1;
+			}			
+		}
+		
+		private function onLeapSwipe(e:GWGestureEvent):void {	
+			container.rotationY += 90;		
+		}		
 		
 		private function onContainerDrag(e:GWGestureEvent):void {
-			container.rotationY += e.value.drag_dx * .1;
+			container.rotationY += e.value.drag_dx * .1;					
 		}	
 		
-
-		
 		private function updateModelButtons():void {	
+			var pop:ModelPopup;
+			var btn:ModelButton;
 			
-			// TODO: reduce redundant code
+			// TODO: remove redundant code
 			for (var i:int = 0; i < modelPositions.length; i++) {
-				if (container.rotationY <= 0) {
+				
+				if (	( (container.rotationY % 360) >= 0 && (container.rotationY % 360) <= 45 ) ||
+						( (container.rotationY % 360) >= -360 && (container.rotationY % 360) <= -315 )
+				) {	
+					if (i != modelIndex) {
+						for each (pop in popups) {
+							pop.tweenOut();
+						}
+						for each (btn in modelButtons) {
+							if ( btn != modelButtons[i])
+								btn.tweenOut();
+						}
+						modelButtons[i].tweenIn();
+						modelIndex = i;
+					}					
+					break;
+				}
+				else if (container.rotationY < 0) {
 					if (-modelPositions[i] >= (container.rotationY % 360) - 45 && 
 						-modelPositions[i] < (container.rotationY % 360) + 45) {
 						if (i != modelIndex) {
-							if (popups[modelIndex].visible) {
-								popups[modelIndex].tweenOut();
+							for each (pop in popups) {
+								pop.tweenOut();
 							}
-							for each (var item:ModelButton in modelButtons) {
-								if ( item != modelButtons[i])
-									modelButtons[modelIndex].tweenOut();
+							for each (btn in modelButtons) {
+								if ( btn != modelButtons[i])
+									btn.tweenOut();
 							}
 							modelButtons[i].tweenIn();
 							modelIndex = i;
-						}					
+						}				
+						break;
 					}
 				}
-				else {			
+				else {	
 					if (modelPositions[i] >= (360 - (container.rotationY % 360) - 45) && 
-						modelPositions[i] < (360 - (container.rotationY % 360) + 45) ) {
+						modelPositions[i] < (360 - (container.rotationY % 360) + 45)) {
 						if (i != modelIndex) {
-							if (popups[modelIndex].visible) {
-								popups[modelIndex].tweenOut();
+							for each (pop in popups) {
+								pop.tweenOut();
 							}
-							for each (var item:ModelButton in modelButtons) {
-								if ( item != modelButtons[i])
-									modelButtons[modelIndex].tweenOut();
-							}							
+							for each (btn in modelButtons) {
+								if ( btn != modelButtons[i])
+									btn.tweenOut();
+							}						
 							modelButtons[i].tweenIn();
 							modelIndex = i;
-						}					
+						}	
+						break;
 					}					
 				}
 			}		
@@ -269,7 +326,6 @@ package  {
 					break;
 				}
 			}
-			trace(targetId);
 		}
 					
 	}

@@ -40,7 +40,8 @@ package {
 		}	
 		
 		public function tweenIn():void {
-			if (TweenMax.isTweening(this)) return;
+			if (TweenMax.isTweening(this)) 
+				TweenMax.killTweensOf(this);
 			rotation = 0;
 			x = stage.stageWidth / 2 + 100;
 			y = stage.stageHeight / 2 - 100;			
@@ -50,7 +51,8 @@ package {
 		}
 		
 		public function tweenOut():void {
-			if (TweenMax.isTweening(this)) return;
+			if (TweenMax.isTweening(this)) 
+				TweenMax.killTweensOf(this);
 			TweenMax.to(this, .25, { alpha:0, onComplete:hide } );
 			function hide():void {
 				alpha = 1;
