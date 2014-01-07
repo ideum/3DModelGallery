@@ -1,10 +1,11 @@
 package 
 {
-	import com.gestureworks.away3d.TouchManager2D;
+	import com.gestureworks.away3d.TouchManager3D;
 	import com.gestureworks.cml.core.CMLParser;
 	import com.gestureworks.core.GestureWorks;
 	import flash.events.Event;
-	import com.gestureworks.cml.core.CMLAway3D; CMLAway3D;
+	import com.gestureworks.cml.core.CMLAway3D;
+	CMLAway3D;
 	ModelPopup;
 	ModelGallery;
 	ModelButton;
@@ -17,8 +18,10 @@ package
 		{
 			super();
 			cml = "library/cml/main.cml";
-			gml = "library/gml/gestures.gml";	
-			leap2D = true;
+			// THERE ARE SOME TOUCH GESTURES IN THE MOTION GERSTURE LIBRARY
+			gml = "library/gml/motion_gestures.gml";
+			// INITIALIZE LEAP INTO 3D MODE BY DEFAULT
+			leap3D = true;
 			CMLParser.addEventListener(CMLParser.COMPLETE, cmlInit);
 		}
 	
@@ -31,7 +34,7 @@ package
 		{
 			CMLParser.removeEventListener(CMLParser.COMPLETE, cmlInit);
 			trace("cmlInit()");
-			TouchManager2D.initialize();
+			TouchManager3D.initialize();
 			var mg:ModelGallery = new ModelGallery;			
 			stage.addChildAt(mg, 0);
 			mg.init();

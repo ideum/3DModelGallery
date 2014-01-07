@@ -1,8 +1,8 @@
 package {
 	
 	import com.gestureworks.cml.core.CMLParser;
-	import com.gestureworks.cml.element.Button;
-	import com.gestureworks.cml.element.TouchContainer;
+	import com.gestureworks.cml.elements.Button;
+	import com.gestureworks.cml.elements.TouchContainer;
 	import com.gestureworks.events.GWGestureEvent;
 	import com.gestureworks.events.GWTouchEvent;
 	import com.greensock.TweenMax;
@@ -27,13 +27,28 @@ package {
 		private function cmlInit(event:Event):void {
 			CMLParser.removeEventListener(CMLParser.COMPLETE, cmlInit);
 			button = searchChildren(Button); 
+			
+			button.motionEnabled = true;
+			button.transform3d = false;
+			button.gestureEvents = true;
+			button.releaseInertia = false;
+			button.nativeTransform = false;
+			button.affineTransform = false;
+			button.motionClusterMode = "global";
+			button.gestureList = { "n-tap":true,"3dmotion-1-trigger-3dhold":true};
+			
 			button.addEventListener(GWGestureEvent.TAP, onButtonTap);
+			button.addEventListener(GWGestureEvent.MOTION_HOLD, onButtonMotionTap);
 			addEventListener(GWTouchEvent.TOUCH_BEGIN, onTouchBegin);
 		}
 		
 		private function onButtonTap(e:GWGestureEvent):void {
 			tweenOut();
-		}	
+		}
+		private function onButtonMotionTap(e:GWGestureEvent):void {
+			trace("motion tap panel btn");
+			tweenOut();
+		}
 		
 		private function onTouchBegin(e:GWTouchEvent):void {
 			parent.addChild(this);

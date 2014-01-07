@@ -9,18 +9,14 @@
     <movie width="800" />
     <movie height="600" />
     <movie version="11" />
-    <movie minorVersion="8" />
+    <movie minorVersion="7" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="..\gwas\development\cml_core" />
-    <class path="..\gwas\development\gml_core" />
-    <class path="..\gwas\development\away3d" />
-    <class path="..\gwas\development\lib\away3d\src" />
-    <class path="..\gwas\development\lib\away3d\pb" />
+    <class path="..\lib" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -59,8 +55,12 @@
   <libraryPaths>
     <element path="..\..\gwas\development\lib\cml_ext.swc" />
     <element path="..\..\gwas\development\lib\gml_ext.swc" />
-    <element path="..\gwas\development\cml_core\lib\cml_ext.swc" />
-    <element path="..\gwas\development\gml_core\lib\gml_ext.swc" />
+    <element path="..\..\gml_core\lib\gml_ext.swc" />
+    <element path="..\..\cml_core\lib\cml_ext.swc" />
+    <element path="..\lib\GestureWorksGML_4.0.0.swc" />
+    <element path="..\lib\GestureWorksAway3D_4.0.0.swc" />
+    <element path="..\lib\GestureWorksCML_4.0.0.swc" />
+    <element path="..\lib\away3d-core-fp11_4_1_4.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

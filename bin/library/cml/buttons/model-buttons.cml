@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cml>
 
-<Container x="1480" y="30">
-	<ModelButton id="star-blanket-button" src="library/assets/models/star-blanket.png" width="60" resample="true" />
-	<ModelButton id="stone-sculpture-button" src="library/assets/models/stone-sculpture.png" width="60" resample="true" />
-	<ModelButton id="clown-button" src="library/assets/models/clown.png" width="60" resample="true" />
-	<ModelButton id="coyote-button" src="library/assets/models/coyote.png" width="60" resample="true" />
-	<Layout classRef="ListLayout" spacingX="80" />
+<Container x="1680" y="35">
+	<ModelButton id="caffeine-button" src="library/assets/molecules/caffiene.png" width="57" resample="true" />
+	<ModelButton id="taurine-button" src="library/assets/molecules/taurine.png" width="57" resample="true" />
+	<ModelButton id="vitamin-b6-button" src="library/assets/molecules/vitamin-b6.png" width="57" resample="true" />
+	<Layout ref="ListLayout" spacingX="80" />
 </Container>
 
 </cml>

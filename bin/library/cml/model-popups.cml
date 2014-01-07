@@ -2,91 +2,34 @@
 
 <cml>
 
-	
-<!-- Blue Mask: Judith 
-<ModelPopup id="blue-mask" width="500" height="270">
-	<Graphic shape="rectangle" width="500" height="270" color="0x5a7eab" lineStroke="0" alpha=".8" />
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Untitled" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Stoneware" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1974" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: LaDucer, Judith Vincente (Jicarilla Apache)" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 7.5 in x 4.5 in" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Judith Vicenti" textBitmap="true"/>
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-rotate" />
-</ModelPopup>-->
-
-
-<!-- Coyote: Brian -->
-<ModelPopup id="coyote" width="500" height="270" leap2D="false" nativeTouch="true" localModes="true">
-	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />		
-	<Graphic shape="rectangle" width="500" height="270" color="0xc36d34" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Coyote with Pot" textBitmap="true" />
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1985" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Romero, Diego (Cochiti)" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 7.125 in x 5.375 in" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Brian Shemayme" textBitmap="true"/>
+<ModelPopup id="caffeine" width="500" height="475">
+	<Graphic shape="rectangle" width="500" height="475" color="0xc36d34" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Caffiene" />
+	<Text fontSize="18" x="20" y="55" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="C.8,H.10,N.4,O.2" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
+		str="Caffeine is found in many plant species, where it acts as a natural pesticide, with high caffeine levels being observed in seedlings that are still developing foliage, but are lacking mechanical protection; Caffeine paralyzes and kills certain insects feeding upon the plant. High caffeine levels have also been found in the surrounding soil of coffee bean seedlings. In humans, caffeine acts as a central nervous system (CNS) stimulant, temporarily warding off drowsiness and restoring alertness. It is most commonly consumed by humans in infusions extracted from the bean of the coffee plant and the leaves of the tea bush, as well as from various foods and drinks containing products derived from the kola nut." />	
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 </ModelPopup>
 
-<!-- Basket: Colleen 
-<ModelPopup id="basket" x="1200" width="500" height="270" >
-	<Graphic shape="rectangle" width="500" height="320" color="0x976a33" lineStroke="0" alpha=".8" />
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: N/A" textBitmap="true"/>
-	<Text fontSize="18" x="20" y="60" width="440" height="100" color="0xffffff" wordWrap="true" multiline="true" textBitmap="true" text="Medium: Basketry, Vegetal, Yucca, Dyes, Aniline, Dyes, Vegetal on close-coiled yucca on bundled Galleta grass"/>	
-	<Text fontSize="18" x="20" y="150" width="440" height="60" color="0xffffff" text="Date: 1945-1960" textBitmap="true" />	
-	<Text fontSize="18" x="20" y="190" width="440" height="60" color="0xffffff" text="Artist: Unknown" textBitmap="true" />	
-	<Text fontSize="18" x="20" y="230" width="440" height="60" color="0xffffff" text="Dimensions: 7 in x 9 in" textBitmap="true" />	
-	<Text fontSize="18" x="20" y="270" width="440" height="60" color="0xffffff" text="3D Scan By: Colleen Lucero" textBitmap="true"/>
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-rotate" />
-</ModelPopup>-->
-
-<!-- Clown: Dedric -->
-<ModelPopup id="clown" width="500" height="270"  leap2D="false" nativeTouch="true" localModes="true">
-	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />			
-	<Graphic shape="rectangle" width="500" height="270" color="0xa44a27" lineStroke="0" alpha=".8"/>	
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Wha-lah (Bear)" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Ceramic, Clay" textBitmap="true"/>		
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1991" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Cajero , Joe (Jemez)" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 12 in x 11.5 in" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Dedric Lupe" textBitmap="true"/>
+<ModelPopup id="taurine" width="500" height="430">
+	<Graphic shape="rectangle" width="500" height="430" color="0xc36d34" lineStroke="0" alpha=".8"/>	
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Taurine" />
+	<Text fontSize="18" x="20" y="55" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="C.2,H.7,N.1,S.1" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
+		str="Taurine is named after the Latin Taurus which means bull or ox, as it was first isolated from ox bile in 1827 by German scientists Friedrich Tiedemann and Leopold Gmelin. In the strict sense, it is not an amino acid, as it lacks a carboxyl group, but it is often called one, even in scientific literature. In the cell, taurine keeps potassium and magnesium inside the cell while keeping excessive sodium out. In this sense, it works like a diuretic. Because it aids the movement of potassium, sodium, and calcium in and out of the cell, taurine has been used as a supplementation for epileptics as well as for people who have uncontrollable facial twitches."/>	
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 </ModelPopup>
 
-<!-- Stone-sculpture: Craig -->
-<ModelPopup id="stone-sculpture" width="500" height="270"  leap2D="false" nativeTouch="true" localModes="true">
-	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />			
-	<Graphic shape="rectangle" width="500" height="270" color="0xb39269" lineStroke="0" alpha=".8"/>	
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: N/A" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Stone, Sandstone" textBitmap="true"/>		
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 2002"/>	
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Cota, Laura Fragua (Jemez)" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 18 in x 6 in x 4 in" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Craig Tompkins" textBitmap="true"/>
+<ModelPopup id="vitamin-b6" width="500" height="400">
+	<Graphic shape="rectangle" width="500" height="400" color="0xc36d34" lineStroke="0" alpha=".8"/>	
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Vitamin B6" />
+	<Text fontSize="18" x="20" y="55" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="C.6,H.8,O.6" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
+		str="Vitamin B6 is a water-soluble compound that was discovered in the 1930s during nutrition studies on rats. In 1934, a Hungarian physician, Paul György discovered a substance that was able to cure a skin disease in rats, this substance he named vitamin B6. In 1938, Lepkovsky isolated vitamin B6 from rice bran. Harris and Folkers in 1939 determined the structure of pyridoxine, and, in 1945, Snell was able to show that there are two forms of vitamin B6, pyridoxal and pyridoxamine. Vitamin B6 was named pyridoxine to indicate its structural homology to pyridine."/>	
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 </ModelPopup>
-
-<!-- Blanket: Tazbah -->
-<ModelPopup id="star-blanket" width="500" height="270"  leap2D="false" nativeTouch="true" localModes="true">
-	<Image src="library/assets/iaia-logo-bw.png" alpha=".3" height="228" x="125" y="21" resample="true" />			
-	<Graphic shape="rectangle" width="500" height="270" color="0x398b96" lineStroke="0" alpha=".8"/>	
-	<Text fontSize="18" x="20" y="20" width="440" height="60" font="OpenSansBold" color="0xffffff" text="Title: Star Blanket" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="60" width="440" height="60" color="0xffffff" text="Medium: Sculpture, Clay" textBitmap="true"/>		
-	<Text fontSize="18" x="20" y="100" width="440" height="60" color="0xffffff" text="Date: 1983" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="140" width="440" height="60" color="0xffffff" text="Artist: Romero, Arlene (Taos)" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="180" width="440" height="60" color="0xffffff" text="Dimensions: 15 in x 9 in" textBitmap="true"/>	
-	<Text fontSize="18" x="20" y="220" width="440" height="60" color="0xffffff" text="3D Scan By: Tazbah Gaussoin" textBitmap="true"/>
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-</ModelPopup>
-
 
 </cml>
