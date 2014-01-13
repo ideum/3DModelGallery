@@ -58,6 +58,7 @@ package  {
 		private var dragRight:Boolean = false;
 		private var initialized:Boolean = false;
 		private var leapTouch:TouchSprite;
+		private var pressed_once:Boolean = false;
 		
 		private var vis3d:MotionVisualizer3D;
 		
@@ -131,6 +132,9 @@ package  {
 				touchView.nativeTransform = false; // MUST BE MANUALLY SET TO FALSE
 				touchView.affineTransform = false; // MUST BE MANUALLY SET TO FALSE
 			
+				
+				touchView.sensorEnabled = true; // ENABLES THE TOUCH SPRITE TO PROCESS SENSOR GESTURES
+				
 				touchView.motionEnabled = true; // ENABLES THE TOUCH SPRITE TO PROCESS MOTION GESTURES
 				touchView.transform3d = false; // ENSURES THAT THE 3D MOTION INTERACTION POINTS ARE PROJECTED INTO THE 2D STAGE
 				touchView.gestureEvents = true; // ACTIVATES THE OBJECT GESTURE EVENT PIPELINE 
@@ -139,7 +143,7 @@ package  {
 				// IN THS EXAMPLE THERE IS A TOUCH GESTURE AND A MOTION GESTURE PRIMATIVE
 				// 1. A PALM DRAG/PAN GESTURE THAT REQUIRES A FULLY CLOSED FIST (FACING DOWN)
 				// THIS WILL PAN THE CARASELE VIEW
-				touchView.gestureList = { "n-drag-inertia":true, "3dmotion-1-palm-2dtranslate":true };
+				touchView.gestureList = { "n-drag-inertia":true, "3dmotion-1-fist-2dtranslate":true };
 				// A SIMPLE N TOUCH DRAG GESTURE LISTENER
 				touchView.addEventListener(GWGestureEvent.DRAG, onContainerDrag);
 				// A MOTION SINGLE PALM DRAG GESTURE LISTNER
@@ -172,6 +176,8 @@ package  {
 				td.nativeTransform = false; // MUST BE MANUALLY SET TO FALSE
 				td.affineTransform = false; // MUST BE MANUALLY SET TO FALSE
 
+				
+				td.sensorEnabled = true; // ENABLES THE TOUCH SPRITE TO PROCESS SENSOR GESTURES
 				td.motionEnabled = true; // ENABLES THE TOUCH SPRITE TO PROCESS MOTION GESTURES
 				td.transform3d = false; // ENSURES THAT THE 3D MOTION INTERACTION POINTS ARE PROJECTED INTO THE 2D STAGE
 				td.gestureEvents = true; // ACTIVATES THE OBJECT GESTURE EVENT PIPELINE 
@@ -182,7 +188,7 @@ package  {
 				// 2. A TRIGGER HOLD GESTURE THAT REQUIRES A BENT THUMB
 				// 3. A PINCH DRAG/ROTATE GESTURE THAT REQUIRES THAT TWO FINGERS OR A FINGER AND A THUMB ARE CLOSE BUT NOT TOUCHING
 				
-				td.gestureList = { "3dmotion-1-palm-2dtranslate":true,
+				td.gestureList = { "3dmotion-1-fist-2dtranslate":true,
 									"3dmotion-1-trigger-3dhold":true,
 									"3dmotion-1-pinch-2dtranslate":true
 									};
@@ -207,7 +213,7 @@ package  {
 			
 			hitGeometry = new CubeGeometry(100, 100, 100, 1, 1, 1);
 			
-			//TouchManager3D.onlyTouchEnabled = false;
+			TouchManager3D.onlyTouchEnabled = false;
 			
 			light = new DirectionalLight;
 			lightPicker = new StaticLightPicker([light]);
@@ -252,14 +258,14 @@ package  {
 				models[i].rotationY = modelRotationsY[i];
 				hitMesh.name = models[i].name;
 				hitMesh.rotationY = modelRotationsY[i];
-				
-				// REGISTER THE ACTUAL 3D OBJECT TO THE MANAGER. WHAT RETURNS IS A TOUCH OBJECT THAT HOLDS THE TRANSFORMATION OF THAT OBJECT
+								
 				t = TouchSprite(TouchManager3D.registerTouchObject(hitMesh, false));
 					t.view = view;
 					t.mouseEnabled = true; // ENSURES THAT THE 3D OBJECT CAN PROCESS TOUCH AND MOTION POINTS 
 					t.nativeTransform = false; // MUST BE MANUALLY SET TO FALSE
 					t.affineTransform = false; // MUST BE MANULALLY SET TO FALSE
 					
+					//t.touchEnabled = true;
 					t.motionEnabled = true; // ENSURES THAT MOTION GESTURES ARE PROCESSED ON THE TOUCHSPRITE
 					t.transform3d = false;  // ENSURES THAT THE 3D MOTION INTERACTION POINTS ARE PROJECTED INTO THE 2D STAGE
 					t.gestureEvents = true; // ENABLES GESTURE EVENT DISPATCHING ON THE TOUCHSPRITE
@@ -273,9 +279,10 @@ package  {
 					// 2. A PINCH DRAG/ROTATE GESTURE THAT REQUIRES THAT TWO FINGERS OR A FINGER AND A THUMB ARE CLOSE BUT NOT TOUCHING
 					t.gestureList = { 	"n-drag-inertia":true, "n-tap":true, "n-scale":true,
 										"3dmotion-1-trigger-3dhold":true,
-										"3dmotion-1-pinch-2dtranslate":true,
-										"3dmotion-2-pinch-2dscale":false
-										};					
+										"3dmotion-1-pinch-2dtranslate":true
+										};		
+										//"3dmotion-2-pinch-2dscale":false
+										
 					// SIMPLE TOUCH GESTURE LISTENERS
 					t.addEventListener(GWGestureEvent.DRAG, onModelDrag);					
 					t.addEventListener(GWGestureEvent.TAP, onModelTap);		
@@ -299,10 +306,67 @@ package  {
 				updateModelButtons();
 				//vis3d.updateDisplay();	
 				view.render();
+				
+				//TEMP, WILL BE GESTURE EVENT BASED 
+				sensorUpdate();
 			}
-		}			
+		}
 		
-		// THE TARGET'S VTO (VIRTUAL TRANSFORM OBJECT) IS THE OBJECT SHOULD RECEIVED THE VIRTUAL TRANSFORMATIONS. IN THIS CASE IT HOLDS THE ACTUAL 3D OBJECT OR MESH
+		
+		private function sensorUpdate():void
+		{
+			//trace("frame", ts.cO.sensorArray.length, ts.cO.pointArray.length);
+			var i:int
+			if (touchView.spn) 
+			{
+				//trace("frame", ts.cO.sensorArray.length, ts.cO.pointArray.length,ts.cO.sensorArray[0].acceleration.x)
+				
+				
+				if (touchView.cO.sensorArray[0].buttons.b)
+				{
+					//ts.rotationY += 10 * ts.cO.sensorArray[0].acceleration.x;
+					container.rotationY += 5 * touchView.cO.sensorArray[0].acceleration.x;		
+				}
+				if ((touchView.cO.sensorArray[0].buttons.a)&&(!pressed_once)) 
+				{
+					//trace("select", modelIndex);
+					var popup:ModelPopup = popups[modelIndex]//document.getElementById(m.vto.name);
+					
+					for (var i:int = 0; i < popups.length; i++) {
+						if (popups[i].visible && popups[i] != popup) {
+							popups[i].tweenOut();
+						}
+					}
+					if (!popup.visible)
+						popup.tweenIn();
+					else
+						popup.tweenOut();
+					
+						
+						
+						
+					pressed_once = true;
+					
+				}
+				else if (!touchView.cO.sensorArray[0].buttons.a) pressed_once = false;
+				
+				
+				if (touchView.cO.sensorArray[0].buttons.down) 		models[modelIndex].rotationX += -5;
+				if (touchView.cO.sensorArray[0].buttons.up)  		models[modelIndex].rotationX += 5;
+				if (touchView.cO.sensorArray[0].buttons.right) 		models[modelIndex].rotationY += -5;
+				if (touchView.cO.sensorArray[0].buttons.left) 		models[modelIndex].rotationY += 5;
+
+				
+				//if ((touchView.cO.sensorArray[0].buttons.right)&&(touchView.cO.sensorArray[0].buttons.b)) container.rotationY += 2;
+				//if ((touchView.cO.sensorArray[0].buttons.left)&&(touchView.cO.sensorArray[0].buttons.b)) container.rotationY -= 2;		
+				
+				
+				
+				
+			}
+		}
+		
+		
 		
 		private function onModelDrag(e:GWGestureEvent):void {
 			e.target.vto.rotationY -= e.value.drag_dx * .5;	
@@ -339,6 +403,7 @@ package  {
 		}	
 		
 		private function onModelTap(e:GWGestureEvent):void {
+			trace("tap",e.target.vto.name);
 			var popup:ModelPopup = document.getElementById(e.target.vto.name);
 			for (var i:int = 0; i < popups.length; i++) {
 				if (popups[i].visible && popups[i] != popup) {
@@ -435,6 +500,7 @@ package  {
 		}
 		
 		private function onModelButtonTap(targetId:String):void {
+			trace(targetId);
 			for (var i:int = 0; i < modelNames.length; i++) {
 				if ( (targetId == modelNames[i]  + "-button")) {	
 					container.rotationY = container.rotationY  % 360;

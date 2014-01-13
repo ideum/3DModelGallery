@@ -19,9 +19,15 @@ package
 			super();
 			cml = "library/cml/main.cml";
 			// THERE ARE SOME TOUCH GESTURES IN THE MOTION GERSTURE LIBRARY
-			gml = "library/gml/motion_gestures.gml";
+			gml = "library/gml/multimodal_gestures.gml";
+			
 			// INITIALIZE LEAP INTO 3D MODE BY DEFAULT
 			leap3D = true;
+			
+			//INITIALIZED WIIMOTE
+			wiimote = true; //turn on wiimote support
+			sensor = true;  //then init sensor
+			
 			CMLParser.addEventListener(CMLParser.COMPLETE, cmlInit);
 		}
 	

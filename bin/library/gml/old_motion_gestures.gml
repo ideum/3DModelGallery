@@ -1,278 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GestureMarkupLanguage xmlns:gml="http://gestureworks.com/gml/version/1.0">
 
-		
-		<Gesture_set gesture_set_name="3d-pinch-gestures">	
-		
-					<Gesture id="3dmotion-n-pinch-2dtranslate" type="motion_drag">
+	<Gesture_set gesture_set_name="n-timeline">
+						
+						<Gesture id="n-hold" type="hold">
 							<match>
 								<action>
 									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+										<point event_duration_min="500" translation_max="2"/>
+										<cluster point_number="0" point_number_min="1" point_number_max="5"/>
 									</initial>
 								</action>
 							</match>	
 							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_translate"/>
+								<algorithm class="temporalmetric" type="discrete">
+									<library  module="hold"/>
 									<returns>
-										<property id="dx" result="dx"/>
-										<property id="dy" result="dy"/>
+										<property id="hold_x" result="x"/>
+										<property id="hold_y" result="y"/>
+										<property id="hold_n" result="n"/>
 									</returns>
 								</algorithm>
 							</analysis>	
 							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_drag">
-										<property ref="dx" target="x"/>
-										<property ref="dy" target="y"/>
+								<update dispatch_type="discrete" dispatch_reset="cluster_remove">
+									<gesture_event  type="hold">
+										<property ref="hold_x"/>
+										<property ref="hold_y"/>
+										<property ref="hold_n"/>
 									</gesture_event>
 								</update>
 							</mapping>
-					</Gesture>
+						</Gesture>
+						
+						<Gesture id="n-tap" type="tap">
+							<match>
+								<action>
+									<initial>
+										<point event_duration_max="200" translation_max="10"/>
+										<cluster point_number="0" point_number_min="1" point_number_max="5"/>
+										<event touch_event="gwTouchEnd"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="temporalmetric" type="discrete">
+									<library module="tap"/>
+									<returns>
+										<property id="tap_x" result="x"/>
+										<property id="tap_y" result="y"/>
+										<property id="tap_n" result="n"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="discrete" dispatch_mode="batch" dispatch_interval="200">
+									<gesture_event  type="tap">
+										<property ref="tap_x"/>
+										<property ref="tap_y"/>
+										<property ref="tap_n"/>
+									</gesture_event>
+								</update>
+							</mapping>
+						</Gesture>
+						
+					  <Gesture id="n-double_tap" type="double_tap">
+						  <match>
+							  <action>
+								  <initial>
+									  <point event_duration_max="300" interevent_duration_max="300" translation_max="20"/>
+									  <cluster point_number="0"/>
+									  <event gesture_event="tap"/>
+								  </initial>
+							  </action>
+						  </match>	
+						  <analysis>
+							  <algorithm class="temporalmetric" type="discrete">
+								  <library module="double_tap"/>
+								  <returns>
+									  <property id="double_tap_x" result="x"/>
+									  <property id="double_tap_y" result="y"/>
+									  <property id="double_tap_n" result="n"/>
+								  </returns>
+							  </algorithm>
+						  </analysis>	
+						  <mapping>
+							  <update dispatch_type="discrete" dispatch_mode="batch" dispatch_interval="200">
+								  <gesture_event  type="double_tap">
+									  <property ref="double_tap_x"/>
+									  <property ref="double_tap_y"/>
+									  <property ref="double_tap_n"/>
+								  </gesture_event>
+							  </update>
+						  </mapping>
+					  </Gesture>
+						
+						<Gesture id="n-triple_tap" type="triple_tap">
+							<match>
+								<action>
+									<initial>
+										<point event_duration_max="300" interevent_duration_max="300" translation_max="20"/>
+										<cluster point_number="0"/>
+										<event gesture_event="tap" />
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="temporalmetric" type="discrete">
+									<library module="triple_tap"/>
+									<returns>
+										<property id="triple_tap_x" result="x"/>
+										<property id="triple_tap_y" result="y"/>
+										<property id="triple_tap_n" result="n"/>
+									</returns>
+								</algorithm>
+							</analysis>
+							<mapping>
+								<update dispatch_type="discrete" dispatch_mode="batch" dispatch_interval="200">
+									<gesture_event  type="triple_tap">
+										<property ref="triple_tap_x"/>
+										<property ref="triple_tap_y"/>
+										<property ref="triple_tap_n"/>
+									</gesture_event>
+								</update>
+							</mapping>
+						</Gesture>
 
-					<Gesture id="3dmotion-1-pinch-2dtranslate" type="motion_drag">
+		</Gesture_set>	
+	
+		<Gesture_set gesture_set_name="3d-motion-gestures">	
+					
+					<Gesture id="3dmotion-n-all-3dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
-										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="10"/>
+										<cluster type="all" input_type="motion" point_number="0" point_number_min="1" point_number_max="10" />
+										<hand type="all" orientation="down" splay="" flatness="1" hand_number="0" finger_number="0" radius=""/>
+											<hand type="left" orientation="down" splay="" flatness="" finger_number="2" radius="">
+												<finger type="thumb" extension="" width="" length=""/>
+												<finger type="index" extension="" width="" length=""/>
+												<tool type="pen" width="50" length="150"/>
+											</hand>
+											<hand type="right" orientation="down" splay="" flatness="" finger_number="5">
+												<finger type="thumb" extension="" width="" length=""/>
+												<finger type="index" extension="" width="" length=""/>
+												<finger type="middle" extension="" width="" length=""/>
+												<finger type="ring" extension="" width="" length=""/>
+												<finger type="pinky" extension="" width="" length=""/>
+											</hand>
 									</initial>
 								</action>
 							</match>	
 							<analysis>
 								<algorithm class="3d_kinemetric" type="continuous">
 									<library module="3d_translate"/>
-									<returns>
-										<property id="dx" result="dx"/>
-										<property id="dy" result="dy"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_drag">
-										<property ref="dx" target="x"/>
-										<property ref="dy" target="y"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-2-pinch-2dtranslate" type="motion_drag">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_translate"/>
-									<returns>
-										<property id="dx" result="dx"/>
-										<property id="dy" result="dy"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_drag">
-										<property ref="dx" target="x"/>
-										<property ref="dy" target="y"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-n-pinch-2dscale" type="motion_scale">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_separate"/>
-									<returns>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_scale">
-										<property ref="ds" target="scaleX"/>
-										<property ref="ds" target="scaleY"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-2-pinch-2dscale" type="motion_scale">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_separate"/>
-									<returns>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_scale">
-										<property ref="ds" target="scaleX"/>
-										<property ref="ds" target="scaleY"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-n-pinch-2drotate" type="motion_rotate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_rotate"/>
-									<returns>
-										<property id="dtheta" result="dtheta"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_rotate">
-										<property ref="dtheta" target="rotation"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-2-pinch-2drotate" type="motion_rotate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_rotate"/>
-									<returns>
-										<property id="dtheta" result="dtheta"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_rotate">
-										<property ref="dtheta" target="rotation"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					
-					<Gesture id="3dmotion-n-pinch-2dmanipulate" type="motion_manipulate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_manipulate"/>
-									<returns>
-										<property id="dx" result="dx"/>
-										<property id="dy" result="dy"/>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-										<property id="dtheta" result="dtheta"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_manipulate">
-										<property ref="dx" target="x"/>
-										<property ref="dy" target="y"/>
-										<property ref="ds" target="scaleX"/>
-										<property ref="ds" target="scaleY"/>
-										<property ref="dtheta" target="rotation"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-		
-					
-					
-					<Gesture id="3dmotion-n-pinch-3dmanipulate" type="motion_manipulate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_manipulate"/>
 									<returns>
 										<property id="dx" result="dx"/>
 										<property id="dy" result="dy"/>
 										<property id="dz" result="dz"/>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-										<property id="dsz" result="ds"/>
-										<property id="dtheta" result="dtheta"/>
-										<property id="dthetaX" result="dthetaX"/>
-										<property id="dthetaY" result="dthetaY"/>
-										<property id="dthetaZ" result="dthetaZ"/>
 									</returns>
 								</algorithm>
 							</analysis>	
 							<mapping>
 								<update dispatch_type="continuous">
-									<gesture_event type="motion_manipulate">
+									<gesture_event type="drag">
 										<property ref="dx" target="x"/>
 										<property ref="dy" target="y"/>
 										<property ref="dz" target="z"/>
-										<property ref="dsx" target="scaleX"/>
-										<property ref="dsy" target="scaleY"/>
-										<property ref="dsz" target="scaleZ"/>
-										<property ref="dtheta" target="rotation"/>
-										<property ref="dthetaX" target="rotationX"/>
-										<property ref="dthetaY" target="rotationY"/>
-										<property ref="dthetaZ" target="rotationZ"/>
 									</gesture_event>
 								</update>
 							</mapping>
 					</Gesture>
-					
+			
+		</Gesture_set>			
+				
+		
+		
+		<Gesture_set gesture_set_name="3d-pinch-gestures">	
+		
 					<Gesture id="3dmotion-n-pinch-3dtranslate" type="motion_drag">
 							<match>
 								<action>
 									<initial>
-										<cluster type="pinch" input_type="motion" point_number="1"/>	
+										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="1" />
+											<hand type="left" orientation="down" splay="" flatness="" finger_number="2">
+												<finger type="thumb" extension=""/>
+												<finger type="index"/>
+											</hand>
+											<hand type="" finger_number ="5"/>
 									</initial>
 								</action>
 							</match>	
@@ -326,11 +241,11 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-pinch-3dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-n-pinch-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
-										<cluster type="pinch" input_type="motion" point_number="2"/>
+										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
 									</initial>
 								</action>
 							</match>	
@@ -340,7 +255,251 @@
 									<returns>
 										<property id="dx" result="dx"/>
 										<property id="dy" result="dy"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="motion_drag">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+
+					<Gesture id="3dmotion-1-pinch-2dtranslate" type="drag">
+							<match>
+								<action>
+									<initial>
+										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_translate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="motion_drag">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+					<Gesture id="3dmotion-2-pinch-2dtranslate" type="drag">
+							<match>
+								<action>
+									<initial>
+										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_translate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="motion_drag">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+					<Gesture id="3dmotion-2-pinch-2dscale" type="scale">
+							<match>
+								<action>
+									<initial>
+										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_separate"/>
+									<returns>
+										<property id="dsx" result="ds"/>
+										<property id="dsy" result="ds"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="motion_scale">
+										<property ref="ds" target="scaleX"/>
+										<property ref="ds" target="scaleY"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+					<Gesture id="3dmotion-2-pinch-2drotate" type="motion_rotate">
+							<match>
+								<action>
+									<initial>
+										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_rotate"/>
+									<returns>
+										<property id="dtheta" result="dtheta"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="motion_rotate">
+										<property ref="dtheta" target="rotation"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+					
+					
+					
+					
+					
+					<Gesture id="3dmotion-n-pinch-2dmanipulate" type="manipulate">
+							<match>
+								<action>
+									<initial>
+										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_manipulate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
+										<property id="dsx" result="ds"/>
+										<property id="dsy" result="ds"/>
+										<property id="dtheta" result="dtheta"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="motion_manipulate">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+										<property ref="ds" target="scaleX"/>
+										<property ref="ds" target="scaleY"/>
+										<property ref="dtheta" target="rotation"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+		
+					
+					<Gesture id="3dmotion-n-pinch-3dmanipulate" type="3d_manipulate">
+							<match>
+								<action>
+									<initial>
+										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_manipulate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
 										<property id="dz" result="dz"/>
+										<property id="dsx" result="dsx"/>
+										<property id="dsy" result="dsy"/>
+										<property id="dsz" result="dsz"/>
+										<property id="dtheta" result="dtheta"/>
+										<property id="dthetaX" result="dthetaX"/>
+										<property id="dthetaY" result="dthetaY"/>
+										<property id="dthetaZ" result="dthetaZ"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="3d_manipulate">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+										<property ref="dz" target="z"/>
+										<property ref="dsx" target="scaleX"/>
+										<property ref="dsy" target="scaleY"/>
+										<property ref="dsz" target="scaleZ"/>
+										<property ref="dtheta" target="rotation"/>
+										<property ref="dthetaX" target="rotationX"/>
+										<property ref="dthetaY" target="rotationY"/>
+										<property ref="dthetaZ" target="rotationZ"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+					<Gesture id="3dmotion-n-bimanual-pinch-3dtranslate" type="drag">
+							<match>
+								<action>
+									<initial>
+										<cluster type="hand" hand_number="1" finger_number="5" point_number="0" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" global_metric="pinch" type="continuous">
+									<library module="3d_translate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
+										<property id="dz" result="dz"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="drag">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+										<property ref="dz" target="z"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+					<Gesture id="n-3d-bimanual-pinch-translate" type="drag">
+							<match>
+								<action>
+									<initial>
+										<cluster type="hand" hand_number="1" finger_number="5" point_number="0" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" global_metric="pinch" type="continuous">
+									<library module="3d_translate"/>
+									<returns>
+										<property id="dx" result="x"/>
+										<property id="dy" result="y"/>
+										<property id="dz" result="z"/>
 									</returns>
 								</algorithm>
 							</analysis>	
@@ -355,243 +514,11 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-pinch-3dscale" type="motion_scale">
+					<Gesture id="3dmotion-1-pinch-hold" type="hold">
 							<match>
 								<action>
 									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_separate"/>
-									<returns>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-										<property id="dsz" result="ds"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_scale">
-										<property ref="dsx" target="scaleX"/>
-										<property ref="dsy" target="scaleY"/>
-										<property ref="dsz" target="scaleZ"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-2-pinch-3dscale" type="motion_scale">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="2" point_number_max="2"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_separate"/>
-									<returns>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-										<property id="dsz" result="ds"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="3d_scale">
-										<property ref="dsx" target="scaleX"/>
-										<property ref="dsy" target="scaleY"/>
-										<property ref="dsz" target="scaleZ"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-n-pinch-3drotate" type="motion_rotate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_rotate"/>
-									<returns>
-										<property id="dtheta" result="dtheta"/>
-										<property id="dthetaX" result="dthetaX"/>
-										<property id="dthetaY" result="dthetaY"/>
-										<property id="dthetaZ" result="dthetaZ"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_rotate">
-										<property ref="dtheta" target="rotation"/>
-										<property ref="dthetaX" target="rotationX"/>
-										<property ref="dthetaY" target="rotationY"/>
-										<property ref="dthetaZ" target="rotationZ"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-2-pinch-3drotate" type="motion_rotate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="2" point_number_min="2" point_number_max="2"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_rotate"/>
-									<returns>
-										<property id="dtheta" result="dtheta"/>
-										<property id="dthetaX" result="dthetaX"/>
-										<property id="dthetaY" result="dthetaY"/>
-										<property id="dthetaZ" result="dthetaZ"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_rotate">
-										<property ref="dtheta" target="rotation"/>
-										<property ref="dthetaX" target="rotationX"/>
-										<property ref="dthetaY" target="rotationY"/>
-										<property ref="dthetaZ" target="rotationZ"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-pinch-3dhold" type="motion_hold">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_hold"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-										<property id="z" result="z"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_hold">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-										<property ref="z" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-pinch-2dtap" type="motion_tap">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_tap"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_tap">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-pinch-2dhold" type="motion_hold">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_hold"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_hold">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-pinch-3dtap" type="motion_tap">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_tap"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-										<property id="z" result="z"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_tap">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-										<property ref="z" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-n-pinch-3dhold" type="motion_hold">
-							<match>
-								<action>
-									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="10"/>
 									</initial>
 								</action>
 							</match>	
@@ -616,11 +543,11 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-pinch-3dtap" type="motion_tap">
+					<Gesture id="3dmotion-1-pinch-tap" type="tap">
 							<match>
 								<action>
 									<initial>
-										<cluster type="pinch" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+										<cluster type="pinch" input_type="motion" point_number="1" point_number_min="1" point_number_max="10"/>
 									</initial>
 								</action>
 							</match>	
@@ -637,9 +564,9 @@
 							<mapping>
 								<update dispatch_type="continuous">
 									<gesture_event type="motion_tap">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-										<property ref="z" target=""/>
+										<property ref="x" target="x"/>
+										<property ref="y" target="y"/>
+										<property ref="z" target="z"/>
 									</gesture_event>
 								</update>
 							</mapping>
@@ -648,7 +575,6 @@
 			</Gesture_set>
 					
 					
-			
 					
 		
 			<Gesture_set gesture_set_name="3d-trigger-gestures">		
@@ -696,7 +622,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-trigger-3dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-n-trigger-3dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -725,7 +651,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-1-trigger-3dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-1-trigger-3dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -754,7 +680,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-trigger-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-n-trigger-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -781,7 +707,7 @@
 							</mapping>
 					</Gesture>
 
-					<Gesture id="3dmotion-1-trigger-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-1-trigger-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -808,7 +734,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-trigger-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-2-trigger-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -835,7 +761,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-trigger-2dscale" type="motion_scale">
+					<Gesture id="3dmotion-2-trigger-2dscale" type="scale">
 							<match>
 								<action>
 									<initial>
@@ -887,7 +813,12 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-trigger-2dmanipulate" type="motion_manipulate">
+					
+					
+					
+					
+					
+					<Gesture id="3dmotion-n-trigger-2dmanipulate" type="manipulate">
 							<match>
 								<action>
 									<initial>
@@ -919,129 +850,12 @@
 								</update>
 							</mapping>
 					</Gesture>
-					
-					
-					<Gesture id="3dmotion-1-trigger-3dhold" type="motion_hold">
-							<match>
-								<action>
-									<initial>
-										<cluster type="trigger" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_hold"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-										<property id="z" result="z"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_hold">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-										<property ref="z" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-trigger-2dtap" type="motion_tap">
-							<match>
-								<action>
-									<initial>
-										<cluster type="trigger" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_tap"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_tap">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-trigger-2dhold" type="motion_hold">
-							<match>
-								<action>
-									<initial>
-										<cluster type="trigger" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_hold"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_hold">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-					<Gesture id="3dmotion-1-trigger-3dtap" type="motion_tap">
-							<match>
-								<action>
-									<initial>
-										<cluster type="trigger" input_type="motion" point_number="1" point_number_min="1" point_number_max="1"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_tap"/>
-									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-										<property id="z" result="z"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="discrete">
-									<gesture_event type="motion_tap">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-										<property ref="z" target=""/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
 						
 			</Gesture_set>
 			
-			
-			
-			
-			
 			<Gesture_set gesture_set_name="3d-finger-gestures">	
 					
-					<Gesture id="3dmotion-n-finger-3dtilt" type="motion_tilt">
+					<Gesture id="3dmotion-n-finger-3dtilt" type="3d_tilt">
 							<match>
 								<action>
 									<initial>
@@ -1074,7 +888,7 @@
 					</Gesture>
 					
 
-					<Gesture id="3dmotion-n-finger-3dmanipulate" type="motion_manipulate">
+					<Gesture id="3dmotion-n-finger-3dtransform" type="3d_manipulate">
 							<match>
 								<action>
 									<initial>
@@ -1089,9 +903,9 @@
 										<property id="dx" result="dx"/>
 										<property id="dy" result="dy"/>
 										<property id="dz" result="dz"/>
-										<property id="dsx" result="ds"/>
-										<property id="dsy" result="ds"/>
-										<property id="dsz" result="ds"/>
+										<property id="dsx" result="dsx"/>
+										<property id="dsy" result="dsy"/>
+										<property id="dsz" result="dsz"/>
 										<property id="dtheta" result="dtheta"/>
 										<property id="dthetaX" result="dthetaX"/>
 										<property id="dthetaY" result="dthetaY"/>
@@ -1117,7 +931,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-finger-3dhold" type="motion_hold">
+					<Gesture id="3dmotion-n-finger-hold" type="motion_hold">
 							<match>
 								<action>
 									<initial>
@@ -1129,24 +943,24 @@
 								<algorithm class="3d_kinemetric" type="continuous">
 									<library module="3d_hold"/>
 									<returns>
-										<property id="x" result="x"/>
-										<property id="y" result="y"/>
-										<property id="z" result="z"/>
+										<property id="x" result="d"/>
+										<property id="y" result="d"/>
+										<property id="z" result="d"/>
 									</returns>
 								</algorithm>
 							</analysis>	
 							<mapping>
-								<update dispatch_type="discrete">
+								<update dispatch_type="continuous">
 									<gesture_event type="motion_hold">
-										<property ref="x" target=""/>
-										<property ref="y" target=""/>
-										<property ref="z" target=""/>
+										<property ref="x" target="x"/>
+										<property ref="y" target="y"/>
+										<property ref="z" target="z"/>
 									</gesture_event>
 								</update>
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-finger-3dtap" type="motion_tap">
+					<Gesture id="3dmotion-n-finger-tap" type="motion_tap">
 							<match>
 								<action>
 									<initial>
@@ -1165,7 +979,7 @@
 								</algorithm>
 							</analysis>	
 							<mapping>
-								<update dispatch_type="discrete">
+								<update dispatch_type="continuous">
 									<gesture_event type="motion_tap">
 										<property ref="x" target=""/>
 										<property ref="y" target=""/>
@@ -1205,7 +1019,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-1-finger-3dtap" type="motion_tap">
+					<Gesture id="3dmotion-1-finger-tap" type="motion_tap">
 							<match>
 								<action>
 									<initial>
@@ -1234,7 +1048,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-1-finger-3dhold" type="motion_hold">
+					<Gesture id="3dmotion-1-finger-hold" type="motion_hold">
 							<match>
 								<action>
 									<initial>
@@ -1264,7 +1078,9 @@
 					</Gesture>
 					
 					
-					<Gesture id="3dmotion-n-finger-2dtranslate" type="motion_drag">
+					
+					
+					<Gesture id="3dmotion-n-finger-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1291,7 +1107,7 @@
 							</mapping>
 					</Gesture>
 
-					<Gesture id="3dmotion-1-finger-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-1-finger-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1318,7 +1134,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-finger-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-2-finger-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1345,7 +1161,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-finger-2dscale" type="motion_scale">
+					<Gesture id="3dmotion-2-finger-2dscale" type="scale">
 							<match>
 								<action>
 									<initial>
@@ -1397,7 +1213,12 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-finger-2dmanipulate" type="motion_manipulate">
+					
+					
+					
+					
+					
+					<Gesture id="3dmotion-n-finger-2dmanipulate" type="manipulate">
 							<match>
 								<action>
 									<initial>
@@ -1487,10 +1308,6 @@
 			</Gesture_set>
 					
 					
-			
-			
-			
-			
 			<Gesture_set gesture_set_name="3d-palm-gestures">	
 					
 					<Gesture id="3dmotion-n-palm-3dtilt" type="motion_tilt">
@@ -1515,7 +1332,7 @@
 							</analysis>	
 							<mapping>
 								<update dispatch_type="continuous">
-									<gesture_event type="motion_tilt">
+									<gesture_event type="3d_tilt">
 										<property ref="dtheta" target="rotation"/>
 										<property ref="dthetaX" target="rotationX"/>
 										<property ref="dthetaY" target="rotationY"/>
@@ -1525,7 +1342,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-palm-3dtransform" type="motion_manipulate">
+					<Gesture id="3dmotion-n-palm-3dtransform" type="3d_manipulate">
 							<match>
 								<action>
 									<initial>
@@ -1552,7 +1369,7 @@
 							</analysis>	
 							<mapping>
 								<update dispatch_type="continuous">
-									<gesture_event type="motion_manipulate">
+									<gesture_event type="3d_manipulate">
 										<property ref="dx" target="x"/>
 										<property ref="dy" target="y"/>
 										<property ref="dz" target="z"/>
@@ -1569,8 +1386,9 @@
 					</Gesture>
 					
 					
-
-					<Gesture id="3dmotion-n-palm-2dtranslate" type="motion_drag">
+					
+					
+					<Gesture id="3dmotion-n-palm-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1597,7 +1415,7 @@
 							</mapping>
 					</Gesture>
 
-					<Gesture id="3dmotion-1-palm-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-1-palm-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1624,7 +1442,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-palm-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-2-palm-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1651,7 +1469,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-palm-2dscale" type="motion_scale">
+					<Gesture id="3dmotion-2-palm-2dscale" type="scale">
 							<match>
 								<action>
 									<initial>
@@ -1703,7 +1521,12 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-n-palm-2dmanipulate" type="motion_manipulate">
+					
+					
+					
+					
+					
+					<Gesture id="3dmotion-n-palm-2dmanipulate" type="manipulate">
 							<match>
 								<action>
 									<initial>
@@ -1794,10 +1617,107 @@
 		</Gesture_set>
 					
 		
-		
+		<Gesture_set gesture_set_name="3d-frame-gestures">	
+					
+					<Gesture id="3dmotion-n-frame-3dtransform" type="3d_manipulate">
+							<match>
+								<action>
+									<initial>
+										<cluster type="frame" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_manipulate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
+										<property id="dz" result="dz"/>
+										<property id="dsx" result="dsx"/>
+										<property id="dsy" result="dsy"/>
+										<property id="dsz" result="dsz"/>
+										<property id="dtheta" result="dtheta"/>
+										<property id="dthetaX" result="dthetaX"/>
+										<property id="dthetaY" result="dthetaY"/>
+										<property id="dthetaZ" result="dthetaZ"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="3d_manipulate">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+										<property ref="dz" target="z"/>
+										<property ref="dsx" target="scaleX"/>
+										<property ref="dsy" target="scaleY"/>
+										<property ref="dsz" target="scaleZ"/>
+										<property ref="dtheta" target="rotation"/>
+										<property ref="dthetaX" target="rotationX"/>
+										<property ref="dthetaY" target="rotationY"/>
+										<property ref="dthetaZ" target="rotationZ"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+			</Gesture_set>		
+					
+			
+			
+			
+			<Gesture_set gesture_set_name="3d-hook-gestures">	
+					
+					<Gesture id="3d-motion-n-hook-3dtransform" type="3d_manipulate">
+							<match>
+								<action>
+									<initial>
+										<cluster type="hook" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
+									</initial>
+								</action>
+							</match>	
+							<analysis>
+								<algorithm class="3d_kinemetric" type="continuous">
+									<library module="3d_manipulate"/>
+									<returns>
+										<property id="dx" result="dx"/>
+										<property id="dy" result="dy"/>
+										<property id="dz" result="dz"/>
+										<property id="dsx" result="dsx"/>
+										<property id="dsy" result="dsy"/>
+										<property id="dsz" result="dsz"/>
+										<property id="dtheta" result="dtheta"/>
+										<property id="dthetaX" result="dthetaX"/>
+										<property id="dthetaY" result="dthetaY"/>
+										<property id="dthetaZ" result="dthetaZ"/>
+									</returns>
+								</algorithm>
+							</analysis>	
+							<mapping>
+								<update dispatch_type="continuous">
+									<gesture_event type="3d_manipulate">
+										<property ref="dx" target="x"/>
+										<property ref="dy" target="y"/>
+										<property ref="dz" target="z"/>
+										<property ref="dsx" target="scaleX"/>
+										<property ref="dsy" target="scaleY"/>
+										<property ref="dsz" target="scaleZ"/>
+										<property ref="dtheta" target="rotation"/>
+										<property ref="dthetaX" target="rotationX"/>
+										<property ref="dthetaY" target="rotationY"/>
+										<property ref="dthetaZ" target="rotationZ"/>
+									</gesture_event>
+								</update>
+							</mapping>
+					</Gesture>
+					
+			</Gesture_set>		
+			
+					
 			<Gesture_set gesture_set_name="3d-thumb-gestures">
 			
-					<Gesture id="3dmotion-n-thumb-3dmanipulate" type="motion_manipulate">
+					<Gesture id="3dmotion-n-thumb-3dtransform" type="3d_manipulate">
 							<match>
 								<action>
 									<initial>
@@ -1842,7 +1762,7 @@
 					
 					
 					
-					<Gesture id="3dmotion-n-thumb-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-n-thumb-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1869,7 +1789,7 @@
 							</mapping>
 					</Gesture>
 
-					<Gesture id="3dmotion-1-thumb-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-1-thumb-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1896,7 +1816,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-thumb-2dtranslate" type="motion_drag">
+					<Gesture id="3dmotion-2-thumb-2dtranslate" type="drag">
 							<match>
 								<action>
 									<initial>
@@ -1923,7 +1843,7 @@
 							</mapping>
 					</Gesture>
 					
-					<Gesture id="3dmotion-2-thumb-2dscale" type="motion_scale">
+					<Gesture id="3dmotion-2-thumb-2dscale" type="scale">
 							<match>
 								<action>
 									<initial>
@@ -1976,7 +1896,11 @@
 					</Gesture>
 					
 					
-					<Gesture id="3dmotion-n-thumb-2dmanipulate" type="motion_manipulate">
+					
+					
+					
+					
+					<Gesture id="3dmotion-n-thumb-2dmanipulate" type="manipulate">
 							<match>
 								<action>
 									<initial>
@@ -2070,7 +1994,7 @@
 					
 			<Gesture_set gesture_set_name="3d-digit-gestures">	
 					
-					<Gesture id="3dmotion-n-digit-tap" type="motion_tap">
+					<Gesture id="3dmotion-n-digit-tap" type="tap">
 							<match>
 								<action>
 									<initial>
@@ -2101,62 +2025,10 @@
 					
 				</Gesture_set>	
 					
-				
-				
-				<Gesture_set gesture_set_name="3d-hook-gestures">	
-					
-					<Gesture id="3d-motion-n-hook-3dtransform" type="motion_manipulate">
-							<match>
-								<action>
-									<initial>
-										<cluster type="hook" input_type="motion" point_number="0" point_number_min="1" point_number_max="10"/>
-									</initial>
-								</action>
-							</match>	
-							<analysis>
-								<algorithm class="3d_kinemetric" type="continuous">
-									<library module="3d_manipulate"/>
-									<returns>
-										<property id="dx" result="dx"/>
-										<property id="dy" result="dy"/>
-										<property id="dz" result="dz"/>
-										<property id="dsx" result="dsx"/>
-										<property id="dsy" result="dsy"/>
-										<property id="dsz" result="dsz"/>
-										<property id="dtheta" result="dtheta"/>
-										<property id="dthetaX" result="dthetaX"/>
-										<property id="dthetaY" result="dthetaY"/>
-										<property id="dthetaZ" result="dthetaZ"/>
-									</returns>
-								</algorithm>
-							</analysis>	
-							<mapping>
-								<update dispatch_type="continuous">
-									<gesture_event type="motion_manipulate">
-										<property ref="dx" target="x"/>
-										<property ref="dy" target="y"/>
-										<property ref="dz" target="z"/>
-										<property ref="dsx" target="scaleX"/>
-										<property ref="dsy" target="scaleY"/>
-										<property ref="dsz" target="scaleZ"/>
-										<property ref="dtheta" target="rotation"/>
-										<property ref="dthetaX" target="rotationX"/>
-										<property ref="dthetaY" target="rotationY"/>
-										<property ref="dthetaZ" target="rotationZ"/>
-									</gesture_event>
-								</update>
-							</mapping>
-					</Gesture>
-					
-			</Gesture_set>	
+		
 
 		
 		
-			
-			
-			
-			
-			
 		<Gesture_set gesture_set_name="basic-core-touch-gestures">
 				
 					<comment>The 'basic-core-gestures' are the simple form of the classic roate scale and drag gestures commonly used to manipulate touch objects.</comment>
