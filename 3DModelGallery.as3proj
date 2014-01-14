@@ -17,6 +17,8 @@
   <classpaths>
     <class path="src" />
     <class path="..\lib" />
+    <class path="..\away3d-core-fp11\src" />
+    <class path="..\gestureworks-flash-gml" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -53,14 +55,11 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="..\..\gwas\development\lib\cml_ext.swc" />
-    <element path="..\..\gwas\development\lib\gml_ext.swc" />
-    <element path="..\..\gml_core\lib\gml_ext.swc" />
-    <element path="..\..\cml_core\lib\cml_ext.swc" />
-    <element path="..\lib\GestureWorksGML_4.0.0.swc" />
+    <element path="..\lib\gml_ext.swc" />
+    <element path="..\lib\cml_ext.swc" />
     <element path="..\lib\GestureWorksAway3D_4.0.0.swc" />
     <element path="..\lib\GestureWorksCML_4.0.0.swc" />
-    <element path="..\lib\away3d-core-fp11_4_1_4.swc" />
+    <element path="..\gestureworks-flash-gml\lib\WiiFlash.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
