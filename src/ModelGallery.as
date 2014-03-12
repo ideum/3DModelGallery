@@ -72,7 +72,7 @@ package  {
 		}
 		
 		public function init():void {			
-					
+			
 			fileList  = [
 				"library/assets/molecules/caffeine.awd",
 				"library/assets/molecules/taurine.awd",				
@@ -89,23 +89,23 @@ package  {
 				0,
 				120,
 				240,
-			]
+			];
 			
 			modelRotationsX = [
 				45,
 				45,
 				45
-			]			
+			];
 			
 			modelRotationsY = [
 				0,
 				125,
 				24
-			]			
+			];
 			
 			view = new View3D();
 			view.backgroundColor = 0x000000;
-			view.width = 1920;
+			view.width  = 1920;
 			view.height = 1080;
 			view.antiAlias = 4;
 			view.camera.lens.far = 15000;
@@ -182,7 +182,7 @@ package  {
 				// 2. A TRIGGER HOLD GESTURE THAT REQUIRES A BENT THUMB
 				// 3. A PINCH DRAG/ROTATE GESTURE THAT REQUIRES THAT TWO FINGERS OR A FINGER AND A THUMB ARE CLOSE BUT NOT TOUCHING
 				
-				td.gestureList = { "3dmotion-1-palm-2dtranslate":true,
+				td.gestureList = {  "3dmotion-1-palm-2dtranslate":true,
 									"3dmotion-1-trigger-3dhold":true,
 									"3dmotion-1-pinch-2dtranslate":true
 									};
@@ -289,9 +289,6 @@ package  {
 				touchSprites.push(t);				
 			}
 			initialized = true;
-			
-			
-			
 		}
 		
 		private function update(e:Event = null):void {
@@ -436,7 +433,7 @@ package  {
 		
 		private function onModelButtonTap(targetId:String):void {
 			for (var i:int = 0; i < modelNames.length; i++) {
-				if ( (targetId == modelNames[i]  + "-button")) {	
+				if ( (targetId == modelNames[i] + "-button")) {	
 					container.rotationY = container.rotationY  % 360;
 					TweenMax.to(container, 1, { shortRotation:{ rotationY:-modelPositions[i] } });
 					break;

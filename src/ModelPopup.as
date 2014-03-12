@@ -28,12 +28,12 @@ package {
 			CMLParser.removeEventListener(CMLParser.COMPLETE, cmlInit);
 			button = searchChildren(Button); 
 			
-			button.motionEnabled = true;
-			button.transform3d = false;
-			button.gestureEvents = true;
-			button.releaseInertia = false;
-			button.nativeTransform = false;
-			button.affineTransform = false;
+			button.motionEnabled 	= true;
+			button.transform3d 		= false;
+			button.gestureEvents 	= true;
+			button.releaseInertia 	= false;
+			button.nativeTransform 	= false;
+			button.affineTransform 	= false;
 			button.motionClusterMode = "global";
 			button.gestureList = { "n-tap":true,"3dmotion-1-trigger-3dhold":true};
 			
