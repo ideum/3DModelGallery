@@ -130,7 +130,7 @@ package  {
 			touchView = new TouchSprite(view);
 				touchView.nativeTransform = false; // MUST BE MANUALLY SET TO FALSE
 				touchView.affineTransform = false; // MUST BE MANUALLY SET TO FALSE
-			
+			touchView.mouseChildren = true;
 				touchView.motionEnabled = true; // ENABLES THE TOUCH SPRITE TO PROCESS MOTION GESTURES
 				touchView.transform3d = false; // ENSURES THAT THE 3D MOTION INTERACTION POINTS ARE PROJECTED INTO THE 2D STAGE
 				touchView.gestureEvents = true; // ACTIVATES THE OBJECT GESTURE EVENT PIPELINE 
@@ -271,11 +271,7 @@ package  {
 					//CONFIGURES THE 3D MODEL TO PROCESS 3 STANDARD TOUCH GESTURES AND 2 3D MOTION GESTURES
 					// 1. A TRIGGER HOLD GESTURE THAT REQUIRES A TRIGGER POSTURE (WITH BENT THUMB) HELD IN PLACE FOR HALF A SECOND 
 					// 2. A PINCH DRAG/ROTATE GESTURE THAT REQUIRES THAT TWO FINGERS OR A FINGER AND A THUMB ARE CLOSE BUT NOT TOUCHING
-					t.gestureList = { 	"n-drag-inertia":true, "n-tap2":true, "n-scale":true,
-										"3dmotion-1-trigger-3dhold":true,
-										"3dmotion-1-pinch-2dtranslate":true,
-										"3dmotion-2-pinch-2dscale":false
-										};					
+					t.gestureList = { 	"n-tap":true, "n-drag":true, "n-scale":true};					
 					// SIMPLE TOUCH GESTURE LISTENERS
 					t.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 					t.addEventListener(GWGestureEvent.TAP, onModelTap);

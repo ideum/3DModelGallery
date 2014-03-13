@@ -2156,37 +2156,6 @@
 				
 					<comment>The 'basic-core-gestures' are the simple form of the classic roate scale and drag gestures commonly used to manipulate touch objects.</comment>
 				
-					<Gesture id="n-tap2" type="tap">
-						<match>
-							<action>
-								<initial>
-									<point event_duration_max="2" translation_max="10"/>
-									<cluster point_number="0" point_number_min="1" point_number_max="10"/>
-									<event touch_event="touchEnd"/>
-								</initial>
-							</action>
-						</match>	
-						<analysis>
-							<algorithm class="temporalmetric" type="discrete">
-								<library module="tap"/>
-								<returns>
-									<property id="tap_x" result="x"/>
-									<property id="tap_y" result="y"/>
-									<property id="tap_n" result="n"/>
-								</returns>
-							</algorithm>
-						</analysis>	
-						<mapping>
-							<update dispatch_type="discrete" dispatch_mode="batch" dispatch_interval="200">
-								<gesture_event  type="tap">
-									<property ref="tap_x"/>
-									<property ref="tap_y"/>
-									<property ref="tap_n"/>
-								</gesture_event>
-							</update>
-						</mapping>
-					</Gesture>
-					
 					<Gesture id="n-tap" type="tap">
 						<match>
 							<action>
@@ -2217,7 +2186,8 @@
 							</update>
 						</mapping>
 					</Gesture>
-		
+					
+					
 					<Gesture id="n-drag-inertia" type="drag">
 						<comment>The 'n-drag' gesture can be activated by any number of touch points between 1 and 10. When a touch down is recognized on a touch object the position
 						of the touch point is tracked. This change in the position of the touch point is mapped directly to the position of the touch object.</comment>
