@@ -67,21 +67,21 @@ package  {
 		private var lightPicker:StaticLightPicker;
 		
 		public function ModelGallery() {
-			TweenPlugin.activate([ShortRotationPlugin]);	
+			TweenPlugin.activate([ShortRotationPlugin]);
 			super();
 		}
 		
-		public function init():void {			
+		public function init():void {
 			
 			fileList  = [
 				"library/assets/molecules/caffeine.awd",
-				"library/assets/molecules/taurine.awd",				
+				"library/assets/molecules/taurine.awd",
 				"library/assets/molecules/vitamin-b6.awd"
 			];
 			
 			modelNames = [ 
-				"caffeine",							
-				"taurine",			
+				"caffeine",	
+				"taurine",
 				"vitamin-b6"
 			];
 			
@@ -116,9 +116,9 @@ package  {
 			
 			
 			cameraController.yFactor = 1;
-			cameraController.wrapPanAngle = true;			
-			cameraController.minTiltAngle = -30;		
-			cameraController.maxTiltAngle = 0;		
+			cameraController.wrapPanAngle = true;
+			cameraController.minTiltAngle = -30;
+			cameraController.maxTiltAngle = 0;
 			
 			container = new ObjectContainer3D;
 			container.rotationX = 0;
@@ -207,7 +207,7 @@ package  {
 			
 			hitGeometry = new CubeGeometry(100, 100, 100, 1, 1, 1);
 			
-			//TouchManager3D.onlyTouchEnabled = false;
+			TouchManager3D.onlyTouchEnabled = false;
 			
 			light = new DirectionalLight;
 			lightPicker = new StaticLightPicker([light]);
@@ -271,14 +271,14 @@ package  {
 					//CONFIGURES THE 3D MODEL TO PROCESS 3 STANDARD TOUCH GESTURES AND 2 3D MOTION GESTURES
 					// 1. A TRIGGER HOLD GESTURE THAT REQUIRES A TRIGGER POSTURE (WITH BENT THUMB) HELD IN PLACE FOR HALF A SECOND 
 					// 2. A PINCH DRAG/ROTATE GESTURE THAT REQUIRES THAT TWO FINGERS OR A FINGER AND A THUMB ARE CLOSE BUT NOT TOUCHING
-					t.gestureList = { 	"n-drag-inertia":true, "n-tap":true, "n-scale":true,
+					t.gestureList = { 	"n-drag-inertia":true, "n-tap2":true, "n-scale":true,
 										"3dmotion-1-trigger-3dhold":true,
 										"3dmotion-1-pinch-2dtranslate":true,
 										"3dmotion-2-pinch-2dscale":false
 										};					
 					// SIMPLE TOUCH GESTURE LISTENERS
-					t.addEventListener(GWGestureEvent.DRAG, onModelDrag);					
-					t.addEventListener(GWGestureEvent.TAP, onModelTap);		
+					t.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+					t.addEventListener(GWGestureEvent.TAP, onModelTap);
 					t.addEventListener(GWGestureEvent.SCALE, onModelScale);
 					// A PINCH MOTION DRAG GESTURE LISTENER
 					t.addEventListener(GWGestureEvent.MOTION_DRAG, onModelMotionDrag);	
@@ -302,14 +302,16 @@ package  {
 		// THE TARGET'S VTO (VIRTUAL TRANSFORM OBJECT) IS THE OBJECT SHOULD RECEIVED THE VIRTUAL TRANSFORMATIONS. IN THIS CASE IT HOLDS THE ACTUAL 3D OBJECT OR MESH
 		
 		private function onModelDrag(e:GWGestureEvent):void {
+			trace("model drag");
 			e.target.vto.rotationY -= e.value.drag_dx * .5;	
 		}
 		private function onModelMotionDrag(e:GWGestureEvent):void {
-			//trace("motion drag", e.target,e.target.vto);
-			e.target.vto.rotationY -= e.value.dx * .5;	
+			trace("motion drag", e.target,e.target.vto);
+			e.target.vto.rotationY -= e.value.dx * .5;
 		}
 		
 		private function onModelScale(e:GWGestureEvent):void {
+			trace("model scale");
 			var val:Number = e.target.vto.scaleX + e.value.scale_dsx * .75;
 			
 			if (val < minScale)
@@ -336,6 +338,7 @@ package  {
 		}	
 		
 		private function onModelTap(e:GWGestureEvent):void {
+			trace("model tap");
 			var popup:ModelPopup = document.getElementById(e.target.vto.name);
 			for (var i:int = 0; i < popups.length; i++) {
 				if (popups[i].visible && popups[i] != popup) {
@@ -349,7 +352,7 @@ package  {
 		}		
 		
 		private function onModelMotionTap(e:GWGestureEvent):void {
-			//trace("motion tap model");
+			trace("motion tap model");
 			var popup:ModelPopup = document.getElementById(e.target.vto.name);
 			for (var i:int = 0; i < popups.length; i++) {
 				if (popups[i].visible && popups[i] != popup) {

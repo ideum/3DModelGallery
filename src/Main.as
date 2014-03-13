@@ -21,7 +21,7 @@ package
 			// THERE ARE SOME TOUCH GESTURES IN THE MOTION GERSTURE LIBRARY
 			gml = "library/gml/motion_gestures.gml";
 			// INITIALIZE LEAP INTO 3D MODE BY DEFAULT
-			leap3D = true;
+			leap3D = false;
 			CMLParser.addEventListener(CMLParser.COMPLETE, cmlInit);
 		}
 	
